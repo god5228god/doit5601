@@ -38,6 +38,7 @@ $(function() {
 </script>
 
 <style>
+/* 상세 페이지 링크 스타일 */
 .product-link {
 	color: #212529;
 	transition: color 0.2s;
@@ -47,6 +48,7 @@ $(function() {
 	color: #0d6efd !important;
 }
 
+/* 아코디언 행 배경색 및 간격 */
 #bid-history-table .collapse.bg-light {
 	background-color: #f8f9fa !important;
 }
@@ -56,48 +58,9 @@ $(function() {
 }
 
 .btn-primary {
-   background-color: #120e63 !important;
-   border-color: #120e63 !important;
+	background-color: #120e63 !important;
+	border-color: #120e63 !important;
 }
- .bg-primary{
-    background-color: #120e63 !important;
-    }
-   	i.text-primary{
-   		color: #120e63 !important;
-   	}
-    .btn-primary, .bg-primary, .btn-outline-primary:hover {
-        background-color: #120e63 !important;
-        border-color: #120e63 !important;
-        color: #ffffff !important; 
-    }
-    
-    .btn-outline-primary{
-    	background-color: #fff !important;
-    	border-color: #120e63 !important;
-    	color: #120e63 !important;
-    }
-
-
-    .badge.bg-primary {
-        background-color: #5172a6 !important;
-    }
-
-    .pagination .page-item.active .page-link {
-        background-color: #5172a6 !important;
-        border-color: #5172a6 !important;
-        color: #ffffff !important;
-    }
-
-    .pagination .page-link:hover {
-        color: #5172a6;
-    }
-    
-    .page-link:focus {
-        box-shadow: 0 0 0 0.25rem rgba(18, 14, 99, 0.25);
-    }
-    .nav-link{
-    	color: #5172a6 !important;
-    }
 </style>
 
 </head>
@@ -119,7 +82,7 @@ $(function() {
                             <table class="table align-middle text-center" id="bid-history-table">
                                 <thead class="table-light">
                                     <tr>
-                                   		<th>No.</th>
+                                   		<th>번호</th>
                                         <th class="text-start">종료 상품명</th>
                                         <th>나의 최종 입찰가</th>
                                         <th>내 입찰 횟수</th>
@@ -143,7 +106,7 @@ $(function() {
                                                 ${dto.auctionTitle }
                                             </a>
                                         </td>
-                                        <td>${dto.bidPrice }원</td>
+                                        <td>${dto.maxPrice }원</td>
                                         <td>${dto.bidCount }회 </td>
                                         
                                         <td><span class="badge ${dto.maxRank==1?'bg-success':'bg-secondary' }">${dto.maxRank==1?'낙찰':'패찰' }</span></td>

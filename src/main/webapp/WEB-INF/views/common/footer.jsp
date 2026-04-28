@@ -12,7 +12,6 @@
 	<footer class="py-5 bg-dark text-white mt-auto">
     <div class="container text-center">
         <p class="mb-0 text-white">© 2026 Auction Project. All Rights Reserved.</p>
-        <a href="${pageContext.request.contextPath }/admin" style="color:#212529">관리자페이지</a>
     </div>
 </footer>
 

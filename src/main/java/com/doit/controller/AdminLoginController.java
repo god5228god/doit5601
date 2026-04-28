@@ -33,7 +33,7 @@ public class AdminLoginController extends HttpServlet {
             session.setAttribute("adminInfo", adminInfo); // 세션에 DTO 통째로 넣기
             
             // 대시보드로 이동
-            response.sendRedirect(request.getContextPath() + "/admin");
+            response.sendRedirect(request.getContextPath() + "/JY/mainDashBoard.jsp");
         } else {
             // 로그인 페이지로 리턴
         	response.sendRedirect(request.getContextPath() + "/admin/auth/login?error=1");

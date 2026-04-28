@@ -23,27 +23,27 @@
 
 
 body
-{	
+{
+	margin-top:50px;
+	
 	
 }
 h1,h2
 {
-	font-size: 20px !important;
-	font-weight: bold !important;
+	font-size: 20px;
+	font-weight: bold;
 }
 h2{
 	margin-bottom: 20px;
 }
 .body
 {
-	margin:50px auto 95px auto;
+	margin:auto;
 	width:760px;
 	border: 2px; solid silver;
 	border-radius: 7px;
 	box-shadow: 0 0 3px rgba(0,0,0,0.4);
 	padding: 30px;
-	height:660px;
-	
 }
 .body div
 {
@@ -165,7 +165,7 @@ button
 				</div>
 				<div class="itemtext">
 					<span class="title"> ${param.title } </span> <br /> <span class="condition">
-						상태: ${grade } / 제조사: ${param.manudacturer} </span><br /> <br /> <span class="date"> <span
+						상태: ${param.grade } / 제조사: ${param.manudacturer} </span><br /> <br /> <span class="date"> <span
 						class="tt">결제일</span> <span class="tt"><fmt:formatDate value="${today }"/></span><br /> <span class="tt">결제금액</span> <span style="font-weight:bold;">${param.price } 원</span><br />
 					</span>
 					<a href="${pageContext.request.contextPath }/user/products"><button type="button" class="btn btn-light">돌아가기</button></a>
@@ -174,6 +174,6 @@ button
 			</div>
 		</div>
 	</div>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
 </body>
 </html>

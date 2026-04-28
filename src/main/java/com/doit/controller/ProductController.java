@@ -23,10 +23,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
+
 @WebServlet("/product/*")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, // 1MB
-		maxFileSize = 1024 * 1024 * 10, // 10MB
-		maxRequestSize = 1024 * 1024 * 15 // 15MB
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024 * 1,  // 1MB
+    maxFileSize = 1024 * 1024 * 10,       // 10MB
+    maxRequestSize = 1024 * 1024 * 15     // 15MB
 )
 public class ProductController extends HttpServlet
 {
@@ -61,7 +63,7 @@ public class ProductController extends HttpServlet
 			if (uri.endsWith("/product/list"))
 			{
 				listAction(req, resp);
-			}
+			} 
 			/*
 			 * else if (uri.endsWith("/user/product")) { myListAction(req, resp, ct); }
 			 */
@@ -96,9 +98,9 @@ public class ProductController extends HttpServlet
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
-
-			resp.getWriter().print("SQL Error: " + e.getMessage());
-			return;
+			
+			resp.getWriter().print("SQL Error: " + e.getMessage()); 
+		    return; 
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -187,8 +189,7 @@ public class ProductController extends HttpServlet
 
 		// 찜 여부 체크
 		int isWishlisted = 0;
-		if (userId != null)
-		{
+		if (userId != null) {
 			com.doit.dao.MyPageDAO myPageDAO = new com.doit.dao.MyPageDAO();
 			isWishlisted = myPageDAO.checkWishlist(userId, productId);
 		}
@@ -316,38 +317,8 @@ public class ProductController extends HttpServlet
 		}
 
 		int productId = Integer.parseInt(req.getParameter("productId"));
-
-		try
-		{
-			productDAO.deleteProduct(productId, userId);
-			resp.sendRedirect(ct + "/product/list");
-
-		} catch (SQLException e)
-		{
-			// 에러코드별 메시지 분기
-			String errorMsg;
-			switch (e.getErrorCode())
-			{
-			case 20016:
-				errorMsg = "진행 중인 경매가 있어 삭제할 수 없습니다.";
-				break;
-			case 20024:
-				errorMsg = "삭제 권한이 없거나 존재하지 않는 상품입니다.";
-				break;
-			case 20023:
-				errorMsg = "상품 정보가 올바르지 않습니다.";
-				break;
-			default:
-				errorMsg = "삭제 중 오류가 발생했습니다. 다시 시도해주세요.";
-				break;
-			}
-
-			// 페이지 이동 없이 삭제 폼으로 돌려보내기
-			ProductDTO product = productDAO.selectProductDetail(productId);
-			req.setAttribute("product", product);
-			req.setAttribute("errorMsg", errorMsg);
-			req.getRequestDispatcher("/WEB-INF/views/product/productDelete.jsp").forward(req, resp);
-		}
+		productDAO.deleteProduct(productId, userId); // 프로시저 내부에서 권한/중복 검증
+		resp.sendRedirect(ct + "/product/myList");
 	}
 
 	// 상품 신고 (GET )
@@ -419,16 +390,15 @@ public class ProductController extends HttpServlet
 	// 세션에서 로그인 사용자 userId 가져오기. 없으면 null.
 	private Integer getLoginUserId(HttpServletRequest req)
 	{
-		HttpSession session = req.getSession(false);
-		if (session == null)
-			return null;
+	    HttpSession session = req.getSession(false);
+	    if (session == null) return null;
 
-		UserInfoDTO loginUser = (UserInfoDTO) session.getAttribute("loginUser");
-		if (loginUser == null)
-			return null;
+	    UserInfoDTO loginUser = (UserInfoDTO) session.getAttribute("loginUser");
+	    if (loginUser == null) return null;
 
-		return loginUser.getUserId();
+	    return loginUser.getUserId();
 	}
+
 
 	// 파라미터 → Integer 변환. 빈 값/숫자 아니면 null
 	private Integer parseInteger(String s)
@@ -481,55 +451,45 @@ public class ProductController extends HttpServlet
 		dto.setIsPublic(parseIntOrZero(req.getParameter("publicCode")));
 
 		String img1 = saveUploadedFile(req, "productImage1");
-		if (img1 == null)
-			img1 = req.getParameter("existingImage1");
+		if (img1 == null) img1 = req.getParameter("existingImage1");
 		dto.setImagePath1(img1);
 
 		String img2 = saveUploadedFile(req, "productImage2");
-		if (img2 == null)
-			img2 = req.getParameter("existingImage2");
+		if (img2 == null) img2 = req.getParameter("existingImage2");
 		dto.setImagePath2(img2);
 
 		String img3 = saveUploadedFile(req, "productImage3");
-		if (img3 == null)
-			img3 = req.getParameter("existingImage3");
+		if (img3 == null) img3 = req.getParameter("existingImage3");
 		dto.setImagePath3(img3);
-
+		
 		String img4 = saveUploadedFile(req, "productImage4");
-		if (img4 == null)
-			img4 = req.getParameter("existingImage4");
+		if (img4 == null) img4 = req.getParameter("existingImage4");
 		dto.setImagePath4(img4);
 
 		String img5 = saveUploadedFile(req, "productImage5");
-		if (img5 == null)
-			img5 = req.getParameter("existingImage5");
+		if (img5 == null) img5 = req.getParameter("existingImage5");
 		dto.setImagePath5(img5);
 
 		String img6 = saveUploadedFile(req, "productImage6");
-		if (img6 == null)
-			img6 = req.getParameter("existingImage6");
+		if (img6 == null) img6 = req.getParameter("existingImage6");
 		dto.setImagePath6(img6);
 
 		String img7 = saveUploadedFile(req, "productImage7");
-		if (img7 == null)
-			img7 = req.getParameter("existingImage7");
+		if (img7 == null) img7 = req.getParameter("existingImage7");
 		dto.setImagePath7(img7);
 
 		String img8 = saveUploadedFile(req, "productImage8");
-		if (img8 == null)
-			img8 = req.getParameter("existingImage8");
+		if (img8 == null) img8 = req.getParameter("existingImage8");
 		dto.setImagePath8(img8);
 
 		String img9 = saveUploadedFile(req, "productImage9");
-		if (img9 == null)
-			img9 = req.getParameter("existingImage9");
+		if (img9 == null) img9 = req.getParameter("existingImage9");
 		dto.setImagePath9(img9);
 
 		String img10 = saveUploadedFile(req, "productImage10");
-		if (img10 == null)
-			img10 = req.getParameter("existingImage10");
+		if (img10 == null) img10 = req.getParameter("existingImage10");
 		dto.setImagePath10(img10);
-
+		
 		return dto;
 	}
 

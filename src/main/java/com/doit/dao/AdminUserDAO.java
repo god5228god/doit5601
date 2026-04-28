@@ -198,12 +198,13 @@ public class AdminUserDAO
 	public List<ShowUserPenaltyDTO> getPenaltyList(int start, int end, String searchKeyword) throws SQLException {
 	    List<ShowUserPenaltyDTO> list = new ArrayList<>();
 	    
+	    // [수정] 검색 대상을 USER_ID(숫자)가 아닌 USER_LOGIN_ID(문자열 아이디)로 변경
 	    String searchCondition = (searchKeyword != null && !searchKeyword.trim().isEmpty()) 
 	                             ? " WHERE USER_LOGIN_ID LIKE ? " : "";
 
 	    String sql = "SELECT * FROM ("
 	               + "  SELECT rownum AS rnum, a.* FROM ("
-	               + "    SELECT * FROM VIEW_PENALTY_LIST " + searchCondition + " ORDER BY PENALTY_ID DESC"
+	               + "    SELECT * FROM VW_PENALTY_LIST " + searchCondition + " ORDER BY PENALTY_ID DESC"
 	               + "  ) a WHERE rownum <= ?"
 	               + ") WHERE rnum >= ?";
 
@@ -242,7 +243,7 @@ public class AdminUserDAO
 	// 2. 전체 내역 개수 조회 (검색 조건 포함)
 	public int getTotalPenaltyCount(String searchKeyword) throws SQLException {
 	    // [수정] 여기도 USER_LOGIN_ID로 검색하도록 변경
-	    String sql = "SELECT COUNT(*) FROM VIEW_PENALTY_LIST";
+	    String sql = "SELECT COUNT(*) FROM VW_PENALTY_LIST";
 	    boolean isSearch = (searchKeyword != null && !searchKeyword.trim().isEmpty());
 	    
 	    if (isSearch) sql += " WHERE USER_LOGIN_ID LIKE ?";

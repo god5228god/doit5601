@@ -54,15 +54,13 @@ public class MyPageController extends HttpServlet{
 		if(uri.endsWith("/user/my")) {
 			
 			
-			int auctionCnt = dao.activeAuctionDataCount(userId);
-			int bidCnt = dao.activeBidDataCount(userId);
+			int auctionCnt = dao.auctionDataCount(userId);
+			int bidCnt = dao.bidDataCount(userId);
 			int wishCnt = dao.wishlistDataCount(userId);
-			int paneltyScore = dao.totalPaneltyScore(userId);
 			
 			request.setAttribute("auctionCnt", auctionCnt);
 			request.setAttribute("bidCnt", bidCnt);
 			request.setAttribute("wishCnt", wishCnt);
-			request.setAttribute("paneltyScore", paneltyScore);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/my/mypage.jsp");
 			dispatcher.forward(request, response);
@@ -239,13 +237,6 @@ public class MyPageController extends HttpServlet{
 			// 내 패널티 내역 페이지 이동
 		}else if(uri.endsWith("/user/penalty")){
 			
-			Map<String, Object> result = service.myPenaltyList(userId);
-			
-			int paneltyScore = dao.totalPaneltyScore(userId);
-			
-			request.setAttribute("penaltyScore", paneltyScore);
-			request.setAttribute("result", result);
-			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/penalties/penaltyHistory.jsp");
 			dispatcher.forward(request, response);
 		
@@ -269,14 +260,11 @@ public class MyPageController extends HttpServlet{
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/product/wishlist.jsp");
 			dispatcher.forward(request, response);
 		
-		// 관심상품 삭제
 		}else if(uri.endsWith("/user/product/wishlist/delete")) {
 			int wishId = Integer.parseInt(request.getParameter("wishId"));
 			dao.deleteWishlist(wishId);
 			response.sendRedirect(cp + "/user/product/wishlist");
 
-			
-		// 관심상품 등록	
 		}else if(uri.endsWith("/user/product/wishlist/add")) {
 		    int productId = Integer.parseInt(request.getParameter("productId"));
 
@@ -289,21 +277,14 @@ public class MyPageController extends HttpServlet{
 		        dao.insertWishlist(userId, productId);
 		        response.sendRedirect(cp + "/product/detail?productId=" + productId + "&wish=ok");
 		    }
-		    
-		    
-		   // 배송완료 처리 
 		}else if(uri.endsWith("/user/auctions/shipping")) {
 			
-			int auctionId = Integer.parseInt(request.getParameter("auctionId"));
 			
-			int paymentId = dao.findPaymentId(auctionId);			
-			int result = dao.shippingOk(paymentId);
 			
-			if(result>0) {
-				request.getSession().setAttribute("msg", "배송 처리가 완료되었습니다.");
-				response.sendRedirect(cp+"/user/auctions/closed");
-			}
+			response.sendRedirect(cp+"/user/auctions/closed");
 		}
+		
+		
 		
 	}
 }

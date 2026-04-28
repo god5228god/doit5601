@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>상품 수정</title>
@@ -21,7 +21,7 @@
             font-size: 1.6rem;
         }
 
-        .section-title {  
+        .section-title {
             font-size: 13px;
             font-weight: 700;
             color: #555;
@@ -39,7 +39,7 @@
             padding: 32px;
         }
 
-        /* 이미지 업로드  박스 */
+        /* 이미지 업로드 박스 */
         .img-upload-box {
             border: 2px dashed #dee2e6;
             border-radius: 10px;
@@ -300,8 +300,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-
-// 미리보기
 function showPreview(input, previewId, placeholderId) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

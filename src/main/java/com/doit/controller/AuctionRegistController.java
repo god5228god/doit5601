@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import com.doit.dao.AuctionDAO;
-import com.doit.dao.ProductDAO;
-import com.doit.dto.ProductDTO;
 import com.doit.dto.UserInfoDTO;
 
 import jakarta.servlet.RequestDispatcher;
@@ -22,23 +20,8 @@ public class AuctionRegistController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String productIdStr = req.getParameter("productId");
-        
-        if (productIdStr != null && !productIdStr.isEmpty()) {
-            try {
-                int productId = Integer.parseInt(productIdStr);
-
-                ProductDAO pDao = new ProductDAO();
-                ProductDTO product = pDao.selectProductDetail(productId);
-
-                req.setAttribute("product", product);
-                req.setAttribute("productId", productId);
-                
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
+        String productId = req.getParameter("productId");
+        req.setAttribute("productId", productId);
         req.getRequestDispatcher("/WEB-INF/views/user/mypage/auctionRegist.jsp").forward(req, resp);
     }
 

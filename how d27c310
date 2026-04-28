@@ -1,0 +1,283 @@
+[33mfa71d69[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mkmc[m[33m, [m[1;31morigin/kmc[m[33m)[m Merge branch 'develop' of https://github.com/god5229god/doit5601 into kmc
+[33md27c310[m 작업 중간 저장
+[33m82f6fd1[m[33m ([m[1;31morigin/develop[m[33m)[m Merge pull request #118 from god5228god/ryh
+[33me2d7183[m 패널티 수정중
+[33m48fb924[m Merge pull request #117 from god5228god/JY-Branch
+[33m2431a9a[m 경매 등록
+[33m1677bfe[m Merge pull request #116 from god5228god/ryh
+[33mccfc445[m 마이페이지 메인 수정
+[33m69d5c35[m Merge pull request #115 from god5228god/kmc
+[33m13df84e[m 상품 등록 이미지 썸네일 기능 추가/ 경매목록/상세목록/경매신고 header,footer 추가
+[33m189c9c7[m Merge pull request #114 from god5228god/ajm_branch
+[33m6e9620f[m 안진모 갱신
+[33m89fb9bc[m Merge pull request #112 from god5228god/ajm_branch
+[33mda1ab71[m 안진모커밋
+[33m538d25d[m Merge pull request #111 from god5228god/ryh
+[33m4480634[m 내 등록상품 수정
+[33macb53c9[m Merge pull request #110 from god5228god/JY-Branch
+[33m7b9cdf9[m 신고 이력 목록 작업중
+[33mb748daa[m Merge pull request #109 from god5228god/ajm_branch
+[33m4ebd14b[m 커밋
+[33mdd0a96a[m Merge pull request #107 from god5228god/JY-Branch
+[33me819403[m Merge pull request #106 from god5228god/kmc
+[33m1fc0b36[m 유저 신고 상세 페이지 작업 중
+[33m90e7654[m Merge pull request #105 from god5228god/LSB
+[33m789a4c6[m Merge pull request #104 from god5228god/ryh
+[33m591cd6e[m 등록기능 완료, 수정/삭제 기능 보완 예정
+[33m0523f7b[m 오전작업 병합을 위한 커밋
+[33m2a15e6c[m 상품 조회 페이지 구현 완료, 패널티 부여 기능 구현 완료, 패널티 부여 프로시저 에러코드 수정 필요
+[33m196bc5a[m Merge pull request #103 from god5228god/ryh
+[33me6cdf78[m Merge pull request #102 from god5228god/kmc
+[33mb41548f[m 중간병합
+[33m85717e2[m 자카르타로 다시 수정
+[33m89eff4b[m Merge branch 'develop' into kmc
+[33ma51f6b1[m 11
+[33m3dc5ba5[m[33m ([m[1;32mdevelop[m[33m)[m Merge pull request #101 from god5228god/ryh
+[33m54a883e[m 중간병합
+[33m8f89194[m Merge pull request #100 from god5228god/kmc
+[33mda54275[m Merge branch 'develop' into kmc
+[33me9e6ed1[m 1추가
+[33m50ca9ca[m Merge pull request #99 from god5228god/ajm_branch
+[33m4c7682d[m 안진모 갱신
+[33mc774dc2[m Merge pull request #98 from god5228god/ryh
+[33m91d23ae[m 중간병합을 위한 커밋
+[33mac5d9f6[m Merge pull request #97 from god5228god/kmc
+[33m1e979c3[m 이미지 등록
+[33m17a66c4[m 안진모 갱신
+[33mfb8c22d[m Merge pull request #96 from god5228god/ryh
+[33mbc53be3[m 중간병합을 위한 커밋
+[33m3f65b69[m Merge pull request #95 from god5228god/kmc
+[33mdbb94f2[m 안진모 갱신
+[33mfe3be5a[m 내상품등록버튼 추가 / 헤더푸터추가
+[33m5b9bd15[m Merge pull request #93 from god5228god/ryh
+[33m160ee46[m Merge pull request #94 from god5228god/kmc
+[33m0b329a5[m 중간병합을 위한 커밋
+[33mfd5160c[m 이미지기능 수정
+[33m78bcb63[m 이미지 수정
+[33m5a944e8[m Merge pull request #92 from god5228god/JY-Branch
+[33mccf78c0[m 병합 전 임시 저장
+[33m7d57f7b[m Merge pull request #90 from god5228god/ajm_branch
+[33mfbe27d9[m Merge pull request #91 from god5228god/ryh
+[33m1781a1c[m 중간병합
+[33mf36e786[m Merge pull request #88 from god5228god/kmc
+[33mdeb1c51[m Merge branch 'develop' into kmc
+[33mb86b5b9[m Merge pull request #87 from god5228god/LSB
+[33md6eec71[m 안진모갱신 04-27:10:12
+[33m5575c32[m Merge branch 'develop' of https://github.com/god5228god/doit5601 into JY-Branch
+[33mab0e20a[m Merge branch 'develop' of https://github.com/god5228god/doit5601 into JY-Branch
+[33m69ab4b2[m pr
+[33m279ef4f[m pull 이후 중간 병합
+[33m2981a95[m Merge pull request #86 from god5228god/JY-Branch
+[33m1b6a71a[m Merge pull request #85 from god5228god/ryh
+[33mdafb5a1[m 메인 링크 수정
+[33m471fa4f[m 병합전임시저장
+[33mf1d46b2[m Merge pull request #84 from god5228god/ajm_branch
+[33ma20f09a[m Merge branch 'develop' into ajm_branch
+[33mae8dbe9[m 안진모갱신
+[33mf56d808[m 안진모
+[33mb3524d8[m 작업 중간 저장
+[33m413e18f[m Merge pull request #82 from god5228god/develop
+[33m1847c2e[m Merge pull request #81 from god5228god/ryh
+[33m5d0f56b[m Merge pull request #80 from god5228god/kmc
+[33m2b19465[m Merge pull request #79 from god5228god/JY-Branch
+[33me2eaf93[m 경매이력, 관심상품 완료
+[33mcf70ab6[m 기존 productReport/AuctionReport파일 연결에서 reportSubmit파일로 연결 views파일에수정하였음
+[33m4302d54[m 관리자 로그인 로직, 테스트 필요
+[33m7d94fe1[m Merge pull request #78 from god5228god/ryh
+[33m3e34100[m 내등록상품, 내경매현황 완료
+[33m48b505d[m Merge pull request #76 from god5228god/kmc
+[33mb1f3dbf[m Merge branch 'develop' into kmc
+[33mf792c4f[m Merge pull request #77 from god5228god/ryh
+[33m917d421[m 내정보수정 완료
+[33m8680d74[m 이미지등록 기능 추가
+[33m4399125[m Merge pull request #75 from god5228god/develop
+[33m694eb69[m Merge pull request #74 from god5228god/JY-Branch
+[33mdaa66c8[m Merge pull request #72 from god5228god/kmc
+[33m4137019[m Merge pull request #71 from god5228god/LSB
+[33mc8c85fc[m Merge pull request #70 from god5228god/ajm_branch
+[33m7894a72[m 뷰 추가
+[33m9aa22f9[m Merge pull request #73 from god5228god/ryh
+[33m84fd6a1[m 로그인, 회원가입완성, 내정보수정 진행중
+[33m24f5215[m 관리자 Controller 분리 작업 진행. 상품 목록 조회 페이지 작업 진행.
+[33m01d0494[m dao, dto 갱신
+[33m0a36550[m 상품등록에 이미지 넣고 넘기는 기능 / 페이징 처리 테스트및 추가 기능 테스트 예정
+[33m8272e3f[m 관리자 게시판 완료
+[33m211f7d1[m 안진모 sql 갱신
+[33m0462b97[m Merge pull request #69 from god5228god/ryh
+[33m6be9d24[m Merge pull request #68 from god5228god/ajm_branch
+[33m6a269f3[m 오전 작업중
+[33m6a96aab[m 안진모 dto,dao,sql 갱신
+[33m9eff889[m Merge pull request #67 from god5228god/LSB
+[33mf21f427[m Merge pull request #66 from god5228god/kmc
+[33m9808f45[m 관리자 뷰 페이지 레이아웃 보강, 관리자 페이지 URI 수정(기존 URI와 병합 및 통일성을 만들기 위해 작업), 관리자 뷰 페이지 파일명 수정(기존 파일들과 파일명의 통일성을 만들기 위해 작업)
+[33m3a96220[m 경매/옥션 컨트롤러 작업중 / AuctionDAO, ProductDAO, AuctionDTO, ProductDTO, ReportDTO 생성완료 (테스트예정)
+[33mbaff6ba[m Merge pull request #65 from god5228god/JY-Branch
+[33m8d2f70f[m Merge pull request #63 from god5228god/ryh
+[33mb9020b4[m 로그인 완성
+[33m0a03bf2[m 관리자페이지 dao 작업 중
+[33m4d2783a[m Merge pull request #62 from god5228god/ajm_branch
+[33m9bd7c1b[m 화면 디자인 수정 완료
+[33md776486[m sql 파일 갱신
+[33m02706d1[m Merge pull request #61 from god5228god/ryh
+[33m0b0caf8[m 뷰컨트롤러연결
+[33m6e68e4f[m Merge pull request #60 from god5228god/develop
+[33m9d54c95[m Merge pull request #57 from god5228god/kmc
+[33m7547b58[m Merge pull request #58 from god5228god/LSB
+[33mb09eca2[m Merge branch 'develop' into LSB
+[33mb8ffd6e[m Merge pull request #59 from god5228god/ryh
+[33m2cef6dc[m 메인컨트롤러 작업
+[33mdae700a[m 금일 작업 마무리
+[33m515176e[m 상품DAO(등록/수정/삭제 생성)
+[33md5e1e81[m Merge branch 'develop' of https://github.com/god5228god/doit5601 into LSB
+[33mb5441cc[m Merge pull request #56 from god5228god/ryh
+[33mc8ed927[m DBCPConn 구성
+[33m5e945b2[m Merge branch 'develop' of https://github.com/god5228god/doit5601 into LSB
+[33md07ad53[m 패널티 취소 프로시저 로직 수정
+[33mffb8622[m Merge pull request #55 from god5228god/ryh
+[33m62e419a[m 뷰페이지 수정
+[33m1faf5b4[m Merge pull request #54 from god5228god/kmc
+[33m1baecc6[m DTO생성 변수명재확인 필요
+[33md17a140[m Merge pull request #52 from god5228god/kmc
+[33m4a69597[m dto생성 dao생성 시 변수명 재확인 필요
+[33mf83859d[m Merge pull request #53 from god5228god/JY-Branch
+[33m9adc5fe[m 테스트 내용 추가
+[33m424f657[m 프로시저 변경사항 저장
+[33mae81dd0[m Merge branch 'develop' into kmc
+[33mb5f7904[m dto 생성/ 뷰dto추가 예정
+[33m992ab20[m 프로시저 반영
+[33ma8aa054[m Merge pull request #51 from god5228god/ryh
+[33m95c0f57[m Merge pull request #50 from god5228god/LSB
+[33mc458644[m 프로시저 통합본 수정
+[33m2434dbf[m 트리거 삭제, 프로시저 로직 수정, DB 스케쥴러 생성
+[33mab125b2[m Merge pull request #49 from god5228god/ryh
+[33mc217e46[m 프로시저 통합파일 수정
+[33me853564[m Merge pull request #48 from god5228god/ryh
+[33mcd273f8[m 프로시저 통합파일 수정
+[33m88bc32f[m 충돌 해결
+[33m9136831[m sql 갱신
+[33md2ecb09[m Merge pull request #46 from god5228god/ryh
+[33m4be1d53[m Merge branch 'develop' into ryh
+[33ma5c975c[m 뷰페이지 수정
+[33m8fb91a0[m Merge pull request #45 from god5228god/develop
+[33mb1ed679[m Merge pull request #44 from god5228god/ryh
+[33m0fe444f[m 뷰 생성
+[33m2a88d4f[m Merge pull request #43 from god5228god/LSB
+[33mea21144[m Merge pull request #42 from god5228god/JY-Branch
+[33m820abe8[m Merge pull request #41 from god5228god/kmc
+[33me3ce09a[m 프로시저 수정 및 윤주열_프로시저에 덮어쓰기
+[33m258de2e[m 프로시저 추가 작업 (패널티 취소 로직에 대한 수정 미완료), VIEW 작업 진행
+[33m42b1f06[m 신고통합 미결제 낙찰대상 뷰 생성
+[33m0765606[m Merge pull request #40 from god5228god/develop
+[33m460133c[m Merge pull request #39 from god5228god/ryh
+[33m7fe1275[m 통합 프로시저, 뷰파일 생성
+[33m9c6d86c[m Merge pull request #38 from god5228god/JY-Branch
+[33md5f8d73[m Merge pull request #37 from god5228god/ajm_branch
+[33m34c4a7c[m Merge pull request #36 from god5228god/LSB
+[33m8f77073[m Merge pull request #35 from god5228god/kmc
+[33m18fadc4[m 프로시저 작업 중
+[33m1c5c845[m 안진모 sql 파일 갱신
+[33m81c05f8[m 프로시저 및 함수 생성
+[33m8c0f66a[m 프로시저 로직 모순점 발견하여 수정 진행중... 중간 병합을 위해 commit 수행.
+[33m26e85ff[m Merge pull request #34 from god5228god/ryh
+[33m9cec531[m 프로시저, 함수 생성
+[33m87a77d4[m Merge pull request #33 from god5228god/ryh
+[33me07281f[m 뷰 생성
+[33ma9da402[m Merge pull request #32 from god5228god/develop
+[33m6abc71d[m Merge pull request #30 from god5228god/JY-Branch
+[33m26122b6[m Merge pull request #31 from god5228god/ryh
+[33m01831fe[m Merge pull request #29 from god5228god/LSB
+[33m504f23c[m Merge branch 'develop' into LSB
+[33mc11d9e2[m 프로시저 파일 추가
+[33m826cf76[m 프로시저 수정
+[33md7cee88[m Merge pull request #28 from god5228god/ryh
+[33m6cc1ae1[m push 작업 재수행이 필요하여 다시 commit
+[33m780758b[m Merge pull request #27 from god5228god/JY-Branch
+[33m4b5e211[m Merge pull request #26 from god5228god/ajm_branch
+[33m4251637[m Merge pull request #24 from god5228god/kmc
+[33m010d03f[m 프로시저, 함수 생성
+[33m4645379[m 경매상품 기간 추가 및 경매 취소 상세내용 추가
+[33m8d529b2[m sql_db객체시트 갱신
+[33m4c31265[m PL/SQL (프로시저 및 트리거) 작성
+[33maa6d8d4[m 상품등록/수정/삭제 프로시저 생성
+[33m1df02f1[m test
+[33mbdd493f[m 뷰페이지 css추가보완
+[33me6297ed[m Merge pull request #23 from god5228god/JY-Branch
+[33mea5feab[m 파일 삭제
+[33me41daf3[m Merge branch 'develop' of https://github.com/god5228god/doit5601 into JY-Branch
+[33m3d21e53[m 임시 작업 파일 추가
+[33ma5a5048[m Merge pull request #22 from god5228god/ryh
+[33m69f231c[m SQL 테이블 재생성
+[33m734fe15[m Merge pull request #21 from god5228god/JY-Branch
+[33m532f482[m 지운 파일 다시 추가
+[33m125e2d1[m Merge pull request #18 from god5228god/JY-Branch
+[33macc5260[m 파일 삭제
+[33m53ea228[m 파일 삭제
+[33mc8e83a7[m Merge pull request #20 from god5228god/ajm_branch
+[33medcbc7f[m Merge pull request #19 from god5228god/LSB
+[33m37219a8[m Merge pull request #15 from god5228god/kmc
+[33m6895f60[m Merge pull request #17 from god5228god/ryh
+[33ma72e364[m 안진모_뷰 갱신
+[33m33c9f9e[m 패널티이력 생성, 경매취소추가
+[33m3a19953[m 경매 이력(종료된 경매 목록) 페이지 추가. 중간 병합을 위해 commit 수행
+[33m42d39f4[m 경매 취소 모달, 뷰 개발 완료
+[33mc9a3bfc[m 상품 목록/경매 상세 뷰페이지 추가 수정
+[33me88b9b0[m Merge pull request #14 from god5228god/develop
+[33m54eedaf[m Merge pull request #12 from god5228god/JY-Branch
+[33m9f47d4e[m Merge pull request #13 from god5228god/ryh
+[33m62bf0a3[m 메인,마이페이지 수정
+[33mbb88c5b[m 관리자 로그인 페이지, 관리자 메인 페이지 완료
+[33m3e5b356[m Merge pull request #11 from god5228god/develop
+[33md9bbb84[m Merge pull request #10 from god5228god/LSB
+[33m3918904[m Merge pull request #9 from god5228god/kmc
+[33m7b6ff4c[m Merge pull request #8 from god5228god/ajm_branch
+[33m4455fea[m anjinmo_jsp 페이지구성 보강
+[33mb20bfbe[m 경매목록페이지/경매등록/경매수정/경매삭제 보완
+[33m1eef961[m 관리자 페이지(상품, 경매, 신고) view 페이지 추가
+[33mbfa5a7c[m Merge pull request #7 from god5228god/ryh
+[33m15ff7e2[m 마이페이지 뷰 수정
+[33ma2960e1[m 관리자 로그인 페이지 작업 중, 로그인 헤더 추가
+[33mc37cd6b[m test1
+[33m9bfcbe6[m test
+[33m1f44a0b[m message
+[33m0c7a3a7[m Merge pull request #6 from god5228god/ajm_branch
+[33m7bf6976[m Merge pull request #5 from god5228god/kmc
+[33me1080fa[m[33m ([m[1;31morigin/ajm_branch[m[33m)[m 페이지 기본 레이아웃파일  갱신 anjinmo_jsp에 모두있음,css갱신
+[33m33d873e[m Merge pull request #4 from god5228god/LSB
+[33m6edc142[m Merge pull request #3 from god5228god/JY-Branch
+[33m1c67d6f[m[33m ([m[1;31morigin/JY-Branch[m[33m)[m 회원목록, 회원상세정보, 패널티 회원 뷰 페이지 작업 / 파일 구조 변경
+[33mdb92a03[m[33m ([m[1;31morigin/LSB[m[33m)[m 페이지 기본 레이아웃 작성 (패널티 부여, 패널티 취소, 전체 상품 목록, 전체 경매 목록)
+[33mcd47544[m Merge pull request #2 from god5228god/ryh
+[33mc7e65a0[m[33m ([m[1;31morigin/ryh[m[33m)[m 마이페이지 뷰페이지 생성 수정중
+[33m3d9ff7f[m 안진모_뷰페이지갱신
+[33m5f25b3c[m Merge branch 'develop' into kmc
+[33m3c82c3a[m main.jsp 오타수정
+[33m0d92038[m main.jsp 푸터 삭제
+[33m432a4fc[m 초록색파트 뷰페이지-강명철
+[33mc6f737a[m 신고 페이지 작업 완료
+[33me67cc3c[m 컨트롤러 작업, 신고 페이지 작업 중
+[33m7003a2a[m 컨트롤러 작업, 신고 페이지 작업 중
+[33m4f23f21[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m Merge pull request #1 from god5228god/JY-Branch
+[33m7d4a546[m 브랜치 테스트
+[33m108bf50[m 로그인, 회원가입, 마이페이지 생성
+[33m78b0b38[m 경매 등록 페이지 스크립트 처리 및 상품 신고 페이지 제작 중, 컨트롤러 구현 예정
+[33m5c420b6[m 집 푸시 테스트
+[33mfdca448[m gitignore파일수정
+[33m83741db[m sql 업데이트, login.jsp, common.css, index.jsp 파일 생성
+[33mb858abe[m 2026-04-17 안진모
+[33m66e3931[m 상품등록,상품수정, 상품삭제 폼구성
+[33m2605c7c[m 인코딩 필터 추가, 뷰 페이지 작업 중
+[33md6916c0[m sql 파일 생성
+[33m832bf4f[m test
+[33m5381b97[m test
+[33m72fc0d7[m 재설정
+[33m7c1ea9d[m 프로시저파일생성
+[33md2605c5[m 폴더 구조 추가
+[33m96b5af3[m sql 파일 수정
+[33m589fc86[m update table sql
+[33maf379ac[m 폴더 내 임시 파일 추가
+[33m897db2a[m 폴더 구조 추가
+[33m7897b24[m create 1 sql file
+[33m124bc45[m 안진모_sql
+[33md02f462[m Merge branch 'main' of https://github.com/god5228god/doit5601
+[33mc0cb07b[m 안진모_sql
+[33m3e2c920[m 21~32번 테이블 생성

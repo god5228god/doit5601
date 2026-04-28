@@ -22,19 +22,14 @@ public class AuctionDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "SELECT * FROM ("
-		        + " SELECT ROWNUM rnum, a.* FROM ("
-		        + "        SELECT AUCTION_ID, USER_ID, AUCTION_TITLE, START_PRICE,"  
-		        + "               AUCTION_START_DATE, AUCTION_END_DATE, IS_FINISHED,"
-		        + "               PRODUCT_ID, PRODUCT_RELEASE_NAME,"
-		        + "               MANUFACTURER_NAME, PRODUCT_GRADE_NAME, IMAGE_PATH_1,"
-		        + "               BID_CURRENT_PRICE, BID_COUNT"
-		        + "        FROM VW_AUCTION_LIST"
-		        + "        WHERE IS_FINISHED = '진행중'"
-		        + "        AND AUCTION_TITLE LIKE ?"
-		        + "        ORDER BY AUCTION_ID DESC"
-		        + " ) a"
-		        + ") WHERE rnum BETWEEN ? AND ?";
+		String sql = "SELECT * FROM (" + "    SELECT ROWNUM rnum, a.* FROM ("
+				+ "        SELECT AUCTION_ID, AUCTION_TITLE, START_PRICE,"
+				+ "               AUCTION_START_DATE, AUCTION_END_DATE, IS_FINISHED,"
+				+ "               PRODUCT_ID, PRODUCT_RELEASE_NAME,"
+				+ "               MANUFACTURER_NAME, PRODUCT_GRADE_NAME, IMAGE_PATH_1,"
+				+ "               BID_CURRENT_PRICE, BID_COUNT" + "        FROM VW_AUCTION_LIST"
+				+ "        WHERE IS_FINISHED = '진행중'" + "        AND AUCTION_TITLE LIKE ?"
+				+ "        ORDER BY AUCTION_ID DESC" + "    ) a" + ") WHERE rnum BETWEEN ? AND ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -48,7 +43,6 @@ public class AuctionDAO {
 			while (rs.next()) {
 				AuctionDTO dto = new AuctionDTO();
 				dto.setAuctionId(rs.getInt("AUCTION_ID"));
-				dto.setUserId(rs.getInt("USER_ID")); 
 				dto.setAuctionTitle(rs.getString("AUCTION_TITLE"));
 				dto.setStartPrice(rs.getInt("START_PRICE"));
 				dto.setAuctionStartDate(rs.getString("AUCTION_START_DATE"));
@@ -135,7 +129,6 @@ public class AuctionDAO {
 			if (rs.next()) {
 				dto = new AuctionDTO();
 				dto.setAuctionId(rs.getInt("AUCTION_ID"));
-				dto.setUserId(rs.getInt("USER_ID"));
 				dto.setAuctionTitle(rs.getString("AUCTION_TITLE"));
 				dto.setAuctionContent(rs.getString("AUCTION_CONTENT"));
 				dto.setStartPrice(rs.getInt("START_PRICE"));
@@ -423,51 +416,43 @@ public class AuctionDAO {
 			}
 
 			
-	// 입찰 메소드
-	public String insertBid(long auctionId, long userNo, int bidPrice)
-	{
-		String result = "FAIL";
-		Connection conn = null;
-		CallableStatement cstmt = null;
-		String sql = "{call PRC_AUCTION_BID_CREATE(?, ?, ?, ?)}";
+			// 입찰 메소드
+			public String insertBid(long auctionId, long userNo, int bidPrice) {
+			    String result = "";
+			    Connection conn = null;
+			    CallableStatement cstmt = null;
 
-		try
-		{
-			conn = DBCPConn.getConnection();
-			cstmt = conn.prepareCall(sql);
+			    String sql = "{call PRC_AUCTION_BID_CREATE(?, ?, ?, ?)}";
 
-			cstmt.setLong(1, auctionId);
-			cstmt.setLong(2, userNo);
-			cstmt.setInt(3, bidPrice);
-			cstmt.registerOutParameter(4, java.sql.Types.VARCHAR);
+			    try {
+			        conn = DBCPConn.getConnection();
+			        cstmt = conn.prepareCall(sql);
 
-			cstmt.executeUpdate();
-			result = cstmt.getString(4);
+			        cstmt.setLong(1, auctionId);
+			        cstmt.setLong(2, userNo);
+			        cstmt.setInt(3, bidPrice);
 
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-			result = "DAO 에러: " + e.getMessage();
-		} finally
-		{
-			// 자원 해제 필수
-			if (cstmt != null)
-				try
-				{
-					cstmt.close();
-				} catch (Exception e)
-				{
-				}
-			if (conn != null)
-				try
-				{
-					conn.close();
-				} catch (Exception e)
-				{
-				}
-		}
-		return result;
-	}
+			        // 2. OUT 파라미터 등록 (Oracle의 VARCHAR2는 Types.VARCHAR 매칭)
+			        cstmt.registerOutParameter(4, java.sql.Types.VARCHAR);
+
+			        cstmt.executeUpdate();
+
+			        result = cstmt.getString(4);
+
+			    } catch (Exception e) {
+			        System.err.println("입찰 프로시저 실행 중 예외 발생: " + e.getMessage());
+			        e.printStackTrace();
+			        result = "시스템 오류가 발생했습니다.";
+			    } finally {
+			        try {
+			            if (cstmt != null) cstmt.close();
+			            if (conn != null) conn.close();
+			        } catch (Exception e2) {}
+			    }
+
+			    return result;
+			}
+
 
 }
 

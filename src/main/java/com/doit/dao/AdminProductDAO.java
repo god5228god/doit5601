@@ -182,41 +182,5 @@ public class AdminProductDAO
 		return result;
 	}
 	
-	
-	// 상품 상세 조회
-	public ProductDTO selectProductDetail(int productId)
-	{
-		ProductDTO result = new ProductDTO();
-		
-		String sql = "SELECT *"
-					+ " FROM VW_PRODUCT_LIST"
-					+ " WHERE PRODUCT_ID = ?";
-		
-		try(Connection conn = DBCPConn.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-		   )
-		{
-			pstmt.setInt(1, productId);
-			
-			try(ResultSet rs = pstmt.executeQuery();)
-			{
-				if (rs.next())
-				{
-					result.setImagePath1(rs.getString("IMAGE_PATH_1"));
-					result.setProductReleaseName(rs.getString("PRODUCT_RELEASE_NAME"));
-					result.setManufacturerName(rs.getString("MANUFACTURER_NAME"));
-					result.setProductCountryName(rs.getString("PRODUCT_COUNTRY_NAME"));
-					result.setProductGradeName(rs.getString("PRODUCT_GRADE_NAME"));
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			throw new RuntimeException("DB 작업 중 에러 발생: " + e.getMessage(), e);
-		}
-		
-		return result;
-	}
-	
 
 }// class AdminProductDAO END

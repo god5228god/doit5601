@@ -8,110 +8,47 @@
 <title>내 입찰 현황</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-#bid-history-table th {
-	/* font-size: 0.85rem; */
-/* 	color: #666; */
-	font-weight: 600;
-	background-color: #f8f9fa;
-}
 
-#bid-history-table td {
-	font-size: 0.95rem;
-	border-bottom: 1px solid #eee;
-}
-
-.history-container {
-	padding: 10px 40px 20px 40px;
-	background-color: #fdfdfd;
-}
-
-.history-list {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-.history-item {
-	display: grid;
-	grid-template-columns: 0.8fr 2fr 1.5fr 1.5fr;
-	padding: 10px 0;
-	border-bottom: 1px solid #f1f1f1;
-	align-items: center;
-	text-align: center;
-}
-
-.history-item:last-child {
-	border-bottom: none;
-}
-
-.history-header {
-	font-weight: 600;
-	color: #999;
-	font-size: 0.8rem;
-	border-bottom: 1px solid #eee;
-	padding-bottom: 5px;
-}
-
-.text-winning {
-	color: #198754;
-	font-weight: bold;
-}
-
-.text-outbid {
-	color: #dc3545;
-}
-
-.bid-detail-row {
-	display: none;
-}
-
-.bid-detail-row.is-visible {
-	display: table-row;
-}
-
-.btn-primary {
-   background-color: #120e63 !important;
-   border-color: #120e63 !important;
-}
- .bg-primary{
-    background-color: #120e63 !important;
-    }
-   	i.text-primary{
-   		color: #120e63 !important;
-   	}
-    .btn-primary, .bg-primary, .btn-outline-primary:hover {
-        background-color: #120e63 !important;
-        border-color: #120e63 !important;
-        color: #ffffff !important; 
-    }
+    #bid-history-table th { font-size: 0.85rem; color: #666; font-weight: 600; background-color: #f8f9fa; }
+    #bid-history-table td { font-size: 0.95rem; border-bottom: 1px solid #eee; }
     
-    .btn-outline-primary{
-    	background-color: #fff !important;
-    	border-color: #120e63 !important;
-    	color: #120e63 !important;
+    .history-container {
+        padding: 10px 40px 20px 40px; 
+        background-color: #fdfdfd;
     }
-
-
-    .badge.bg-primary {
-        background-color: #5172a6 !important;
+    .history-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
-
-    .pagination .page-item.active .page-link {
-        background-color: #5172a6 !important;
-        border-color: #5172a6 !important;
-        color: #ffffff !important;
+    .history-item {
+        display: grid;
+        grid-template-columns: 0.8fr 2fr 1.5fr 1.5fr;
+        padding: 10px 0;
+        border-bottom: 1px solid #f1f1f1;
+        align-items: center;
+        text-align: center;
     }
-
-    .pagination .page-link:hover {
-        color: #5172a6;
-    }
+    .history-item:last-child { border-bottom: none; }
     
-    .page-link:focus {
-        box-shadow: 0 0 0 0.25rem rgba(18, 14, 99, 0.25);
+
+    .history-header {
+        font-weight: 600;
+        color: #999;
+        font-size: 0.8rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
     }
-    .nav-link{
-    	color: #5172a6 !important;
-    }
+    .text-winning { color: #198754; font-weight: bold; }
+    .text-outbid { color: #dc3545; }
+
+    .bid-detail-row { display: none; } 
+    .bid-detail-row.is-visible { display: table-row; }
+    
+    .btn-primary {
+	background-color: #120e63 !important;
+	border-color: #120e63 !important;
+}
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
@@ -170,13 +107,13 @@ $(function() {
         const $targetRow = $currentRow.next('.bid-detail-row');
         
         $('.bid-detail-row').not($targetRow).hide();
-        $('.detail-btn').not($btn).text('내역');
+        $('.detail-btn').not($btn).text('내역 보기');
 
         $targetRow.stop().fadeToggle(150);
         
         setTimeout(() => {
             const isVisible = $targetRow.is(':visible');
-            $btn.text(isVisible ? '닫기' : '내역');
+            $btn.text(isVisible ? '내역 닫기' : '내역 보기');
         }, 160);
     });
 });
@@ -197,16 +134,16 @@ $(function() {
                     <h5 class="mb-0 fw-bold">내 입찰 현황</h5>
                 </div>
                 
-                <div class="card-body">
+                <div class="card-body px-0">
                     <div class="table-responsive">
                         <table class="table align-middle" id="bid-history-table">
                             <thead>
                                 <tr class="text-center text-nowrap">
-                                    <th style="width: 5%">No.</th>
-                                    <th style="width: 30%">상품명</th>
+                                    <th style="width: 8%">번호</th>
+                                    <th style="width: 25%">상품명</th>
                                     <th style="width: 15%">현재가</th>
                                     <th style="width: 15%">나의 최고가</th>
-                                    <th style="width: 10%">예상 순위</th>
+                                    <th style="width: 12%">예상 순위</th>
                                     <th style="width: 15%">마감 기한</th>
                                     <th style="width: 10%">관리</th>
                                 </tr>
@@ -217,8 +154,8 @@ $(function() {
 	                                <tr class="table-success-subtle">
 	                                    <td class="text-center text-muted small">${status.count }</td>
 	                                    <td>
-	                                        <a class="fw-bold text-dark text-decoration-none" href="${pageContext.request.contextPath }/auction/detail?auctionId=${dto.auctionId}">${dto.auctionTitle }</a>
-	                                        <div class="text-muted" style="font-size: 0.75rem;">입찰 총 ${dto.bidCount }회</div>
+	                                        <div class="fw-bold text-dark">${dto.auctionTitle }</div>
+	                                        <div class="text-muted" style="font-size: 0.75rem;">나의 입찰 총 ${dto.bidCount }회</div>
 	                                    </td>
 	                                    <td class="text-center fw-bold text-danger">${dto.currentPrice }원</td>
 	                                    <td class="text-center fw-bold text-dark">${dto.maxPrice }원</td>
@@ -226,7 +163,7 @@ $(function() {
 	                                    	<td class="text-center countdown" data-end="${dto.auctionEndDate }"><span class="text-danger fw-bold time-display">계산중...</span>
 										</td>
 	                                    <td class="text-center">
-	                                        <button type="button" class="btn btn-sm btn-outline-primary detail-btn">내역</button>
+	                                        <button type="button" class="btn btn-sm btn-outline-primary detail-btn">내역 보기</button>
 	                                    </td>
 	                                </tr>
 	                                <tr class="bid-detail-row">

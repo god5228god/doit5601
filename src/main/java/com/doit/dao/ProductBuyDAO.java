@@ -60,23 +60,13 @@ public class ProductBuyDAO
 	public int confirmBid(BidActionDTO dto)
 	{
 		Connection conn = DBCPConn.getConnection();
-		if(conn != null)
-		{
-			System.out.println("구매확정데이터베이스연결");
-		}else
-		{
-			System.out.println("구매확정데이터베이스연결실패");
-		}
-			
 		CallableStatement cstmt = null;
 		String sql = "";
-		System.out.println("sql:"+sql);
+
 		int result = 0;
 		try
 		{
 			sql = "{CALL PRC_PURCHASE_CONFIRM(?,?)}";
-			
-			System.out.println("sql:"+sql);
 
 			cstmt = conn.prepareCall(sql);
 
@@ -88,9 +78,7 @@ public class ProductBuyDAO
 			System.out.println("userId: " + dto.getUserId());
 	        System.out.println("bidResultId: " + dto.getBidResultId());
 			
-			System.out.println("구매확정결과: " + result);
-			System.out.println("구매확정유저아이디: " + dto.getUserId());
-			System.out.println("구매확정낙찰번호: " + dto.getBidResultId());
+			System.out.println("result: " + result);
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -111,28 +99,28 @@ public class ProductBuyDAO
 	}
 
 	// 낙찰 결제 취소
-	public int failBid(BidActionDTO dto) 
+	public void failBid(BidActionDTO dto) throws SQLException
 	{
 		Connection conn = DBCPConn.getConnection();
 		CallableStatement cstmt = null;
 
-		String sql = "";
-		int result = 0;
+		String sql = "{CALL BID_FAILURE_HISTORY(?,?)";
 		
 		try
 		{
 			
-			sql = "{CALL PRC_BID_FAILURE_PROCESS(?,?)}";
+			sql = "{CALL BID_FAILURE_HISTORY(?,?)}";
 			cstmt = conn.prepareCall(sql);
 			
 			cstmt.setInt(1, dto.getUserId());
 			cstmt.setInt(2, dto.getBidResultId());
 			
-			result = cstmt.executeUpdate();
+			cstmt.executeUpdate();
 			
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
+			throw e;
 		}finally
 		{
 			try
@@ -145,7 +133,6 @@ public class ProductBuyDAO
 				System.out.println(e);
 			}
 		}
-		return result;
 	}
 
 	// 머니 이력
@@ -681,42 +668,37 @@ public class ProductBuyDAO
 		try
 		{
 			list = new ArrayList<AuctionResultViewDTO>();
-			
-			 
 
 			sql =   """
-					SELECT *
-                    FROM(
-                    SELECT 경매번호,경매제목,낙찰자번호,낙찰자ID,낙찰금액,낙찰일시,낙찰결과번호
+					SELECT 경매번호,경매제목,낙찰자번호,낙찰자ID,낙찰금액,낙찰일시,낙찰결과번호
 					,C.PRODUCT_ID AS 제품ID,C.IMAGE_PATH_1 AS 이미지,START_PRICE AS 시작가,B.CREATED_AT AS 경매생성일
 					,AUCTION_PERIOD_ID AS 경매기간,WINNING_BID_ID AS 낙찰자입찰번호,WINNING_BID_TIME AS 낙찰시간,AUCTION_FINAL_PRICE AS 결제낙찰금액
 					,AUCTION_STATUS AS 경매상태, WINNING_STATUS AS 낙찰상태, WINNING_PAYMENT_STATUS AS 낙찰자결제상태, WINNING_PAYMENT_MONEY_ID AS 머니ID
 					,WINNING_PAYMENT_DATE AS 결제일자, BID_FAIL_YN AS 실패여부, BID_FAIL_TYPE AS 실패타입, SHIPPING_YN AS 배송여부, SHIPPING_DATE AS 배송일자
 					,PURCHASE_CONFIRM_YN AS 구매확정여부, PURCHASE_CONFIRM_DATE AS 구매확정일자
-                    ,ROW_NUMBER() OVER(PARTITION BY 경매번호 ORDER BY 낙찰금액 DESC, 낙찰일시 DESC) AS RANK
 					FROM VW_UNPAID_WINNING_TARGET_1 A
 					LEFT JOIN VW_AUCTION_WINNING_RESULT B
 					ON B.AUCTION_ID = A.경매번호
                     JOIN PRODUCT C
                     ON B.PRODUCT_ID = C.PRODUCT_ID
 					WHERE A.낙찰자번호 = ?
-                    )WHERE RANK = 1
+					
 					""";
 			if(type == 1)
 			{
-				sql += " AND 실패여부 = 'Y'";
+				sql += " AND BID_FAIL_YN = 'Y'";
 			}else if(type == 2)
 			{
-				sql += " AND 낙찰자결제상태 = 'Pending' AND 실패여부 = 'N'";
+				sql += " AND WINNING_PAYMENT_STATUS = 'Pending' AND BID_FAIL_YN = 'N'";
 			}else if(type == 3)
 			{
-				sql += " AND 낙찰자결제상태 = 'Completed' AND 실패여부 = 'N' AND 배송여부 = 'N'";
+				sql += " AND WINNING_PAYMENT_STATUS = 'Completed' AND BID_FAIL_YN = 'N' AND SHIPPING_YN = 'N'";
 			}else if(type == 4)
 			{
-				sql += " AND 배송여부 = 'Y' AND 구매확정여부 = 'N'";
+				sql += " AND SHIPPING_YN = 'Y' AND PURCHASE_CONFIRM_YN = 'N'";
 			}else if(type == 5)
 			{
-				sql += " AND 구매확정여부 = 'Y'";
+				sql += " AND PURCHASE_CONFIRM_YN = 'Y'";
 			}
 			
 			sql += " ORDER BY 낙찰일시"
@@ -808,13 +790,10 @@ public class ProductBuyDAO
 					,COUNT(CASE WHEN WINNING_PAYMENT_STATUS = 'Completed' AND BID_FAIL_YN = 'N' AND SHIPPING_YN = 'N' THEN 1 END) AS UNSHIPPING
 					,COUNT(CASE WHEN SHIPPING_YN = 'Y' AND PURCHASE_CONFIRM_YN = 'N' THEN 1 END) AS SHIPPING
 					,COUNT(CASE WHEN PURCHASE_CONFIRM_YN = 'Y' THEN 1 END) AS CONFIRM
-                    FROM(
-                    SELECT BID_FAIL_YN,WINNING_PAYMENT_STATUS,SHIPPING_YN,PURCHASE_CONFIRM_YN,ROW_NUMBER() OVER(PARTITION BY 경매번호 ORDER BY 낙찰금액 DESC, 낙찰일시 DESC) AS RANK
 					FROM VW_UNPAID_WINNING_TARGET_1 A
 					LEFT JOIN VW_AUCTION_WINNING_RESULT B
 					ON B.AUCTION_ID = A.경매번호
 					WHERE A.낙찰자번호 = ?
-                    )WHERE RANK = 1
 					""";                                                 
 			pstmt = conn.prepareStatement(sql);
 			
@@ -867,14 +846,10 @@ public class ProductBuyDAO
 		{
 			sql =   """
 					SELECT COUNT(*) AS TOTAL
-                    FROM( SELECT BID_FAIL_YN,WINNING_PAYMENT_STATUS
-                    ,SHIPPING_YN,PURCHASE_CONFIRM_YN,ROW_NUMBER() OVER(PARTITION BY 경매번호 ORDER BY 낙찰금액 DESC, 낙찰일시 DESC) AS RANK
 					FROM VW_UNPAID_WINNING_TARGET_1 A
 					LEFT JOIN VW_AUCTION_WINNING_RESULT B
 					ON B.AUCTION_ID = A.경매번호
 					WHERE A.낙찰자번호 = ?
-                    )
-                    WHERE RANK = 1
 					""";                                                 
 			if(type == 1)
 			{
@@ -979,7 +954,7 @@ public class ProductBuyDAO
 		try
 		{
 			sql = """
-					SELECT M.BID_RESULT_ID,A.USER_ID, A.AUCTION_ID, AUCTION_TITLE,START_PRICE,BID_CURRENT_PRICE,BID_MAX_PRICE,AUCTION_END_DATE+1 AS AUCTION_START_DATE,AUCTION_END_DATE,IS_FINISHED,PRODUCT_ID
+					SELECT M.BID_RESULT_ID,A.USER_ID, A.AUCTION_ID, AUCTION_TITLE,START_PRICE,BID_CURRENT_PRICE,BID_MAX_PRICE,AUCTION_START_DATE,AUCTION_END_DATE,IS_FINISHED,PRODUCT_ID
 					,PRODUCT_ALIAS,MANUFACTURER_NAME,PRODUCT_GRADE_NAME,IMAGE_PATH_1,USER_NAME,USER_EMAIL,USER_PHONE,USER_ZIPCODE,USER_ADDRESS,USER_ADDRESS_DETAIL
 					FROM  AUCTION_WINNING_RESULT M
 					LEFT JOIN AUCTION_BID_PARTICIPATION Q
@@ -1041,41 +1016,6 @@ public class ProductBuyDAO
 		}
 
 		return dto;
-	}
-	
-	public int unregist(int userId)
-	{
-		Connection conn = DBCPConn.getConnection();
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = "";
-		
-		try
-		{
-			sql ="{CALL PRC_USER_DELETE(?)}";
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, userId);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}finally
-		{
-			try
-			{
-				pstmt.close();
-				DBCPConn.close(conn);
-			} catch (Exception e)
-			{
-				e.printStackTrace();
-				System.out.println(e);
-			}
-		}
-		return result;
 	}
 
 }

@@ -72,7 +72,7 @@ button
 }
 a:visited ,a
 {
-	text-decoration: none !important;
+	text-decoration: none;
 }
 </style>
 <script type="text/javascript">
@@ -87,7 +87,7 @@ a:visited ,a
 </script>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
 	<div class="body shadow-sm">
 		<h1>충전</h1>
 		<hr />
@@ -110,6 +110,5 @@ a:visited ,a
 				class="btn btn-light">메인으로</button></a>
 		</div>
 	</div>
-	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

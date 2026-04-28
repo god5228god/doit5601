@@ -18,7 +18,6 @@ import com.doit.util.DBCPConn;
 
 public class MyPageDAO {
 
-//[회원정보]========================================================================================================================		
 	
 	// 비밀번호 확인 메소드
 	public int checkPwd(String userId, String userPwd) {
@@ -96,9 +95,7 @@ public class MyPageDAO {
 		
 		return result;
 	}
-
-//[상품]========================================================================================================================		
-
+	
 	
 	// 내 등록 상품 전체 데이터 갯수
 	public int productDataCount(int userId) {
@@ -183,9 +180,6 @@ public class MyPageDAO {
 		
 	}	
 	
-//[경매]========================================================================================================================		
-
-	
 	// 내 경매 전체 데이터 갯수
 	public int auctionDataCount(int userId) {
 		int result = 0;
@@ -213,58 +207,6 @@ public class MyPageDAO {
 		return result;
 	}
 	
-	// 진행 중인 경매 데이터 갯수
-	public int activeAuctionDataCount(int userId) {
-		int result = 0;
-		
-		String sql = """
-				SELECT COUNT(*) AS COUNT
-				FROM VW_AUCTION_LIST
-				WHERE USER_ID=? AND IS_FINISHED='진행중'
-				""";
-		try (Connection conn = DBCPConn.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql)){
-			
-			pstmt.setInt(1, userId);
-			try(ResultSet rs = pstmt.executeQuery()){
-				if(rs.next()) {
-					result = rs.getInt("COUNT");
-				}
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
-	
-	// 종료 된 경매 데이터 갯수
-	public int closedAuctionDataCount(int userId) {
-		int result = 0;
-		
-		String sql = """
-				SELECT COUNT(*) AS COUNT
-				FROM VW_AUCTION_LIST
-				WHERE USER_ID=? AND IS_FINISHED!='진행중'
-				""";
-		try (Connection conn = DBCPConn.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql)){
-			
-			pstmt.setInt(1, userId);
-			try(ResultSet rs = pstmt.executeQuery()){
-				if(rs.next()) {
-					result = rs.getInt("COUNT");
-				}
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
-	
 	// 내 경매 현황 게시글 리스트
 	public List<AuctionDTO> myAuctionStatusBoard(int offset, int size, int userId){
 		
@@ -273,7 +215,7 @@ public class MyPageDAO {
 		
 		String sql = """
 				SELECT AUCTION_ID, AUCTION_TITLE
-				,AUCTION_START_DATE, AUCTION_END_DATE, IMAGE_PATH_1, BID_COUNT
+				, AUCTION_START_DATE, AUCTION_END_DATE, IMAGE_PATH_1, BID_COUNT
 				FROM VW_AUCTION_LIST
 				WHERE USER_ID = ? AND AUCTION_END_DATE > SYSDATE AND IS_FINISHED = '진행중'
 				ORDER BY AUCTION_ID DESC OFFSET ? ROWS FETCH FIRST ? ROWS ONLY""";
@@ -359,7 +301,7 @@ public class MyPageDAO {
 				SELECT
 				    AL.AUCTION_ID,
 				    AL.AUCTION_TITLE,
-				    NVL(VR.AUCTION_FINAL_PRICE, 0) AS FINAL_PRICE,
+				    NVL(VR.WINNING_BID_PRICE, 0) AS FINAL_PRICE,
 				    TO_CHAR(AL.AUCTION_END_DATE, 'YYYY-MM-DD') AS AUCTION_END_DATE, 
 				    CASE
 				        WHEN AL.IS_FINISHED = '경매취소' THEN '경매취소'
@@ -417,11 +359,6 @@ public class MyPageDAO {
 		
 	}	
 	
-	
-	
-//[입찰]========================================================================================================================		
-	
-	
 	// 입찰 현황 리스트 
 	public List<MyBidStatusDTO> myBidStatusBoard(int offset, int size, int userId){
 		
@@ -475,32 +412,6 @@ public class MyPageDAO {
 		
 	}	
 	
-	// 내 진행 입찰 데이터 갯수
-	public int activeBidDataCount(int userId) {
-		int result = 0;
-
-		String sql = """
-				SELECT COUNT(*) AS COUNT
-				FROM VW_BID_LIST
-				WHERE BIDDER_ID=? AND AUCTION_STATUS='진행중'
-				""";
-		try (Connection conn = DBCPConn.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-			pstmt.setInt(1, userId);
-			try (ResultSet rs = pstmt.executeQuery()) {
-				if (rs.next()) {
-					result = rs.getInt("COUNT");
-				}
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return result;
-	}
-		
-	
 	// 내 입찰 전체 데이터 갯수
 	public int bidDataCount(int userId) {
 		int result = 0;
@@ -527,7 +438,6 @@ public class MyPageDAO {
 		return result;
 	}
 	
-	
 	// 입찰 이력 리스트 
 		public List<MyBidStatusDTO> myBidHistoryBoard(int offset, int size, int userId){
 			
@@ -535,11 +445,11 @@ public class MyPageDAO {
 			
 			
 			String sql = """
-					SELECT AUCTION_TITLE, BID_PRICE, BID_RANK, AUCTION_END_DATE, AUCTION_ID
+					SELECT AUCTION_TITLE, BID_PRICE, BID_RANK, AUCTION_END_DATE
 					FROM VW_BID_LIST
-					WHERE BIDDER_ID = ? AND AUCTION_STATUS != '진행중'
-					ORDER BY AUCTION_END_DATE DESC, BID_PRICE DESC
-					  	OFFSET ? ROWS FETCH FIRST ? ROWS ONLY
+					WHERE BIDDER_ID = ? AND AUCTION_STATUS= '마감'
+					ORDER BY AUCTION_END_DATE DESC
+					OFFSET ? ROWS FETCH FIRST ? ROWS ONLY	
 					
 					""";
 			
@@ -560,7 +470,6 @@ public class MyPageDAO {
 						dto.setBidPrice(rs.getInt("BID_PRICE"));
 						dto.setBidRank(rs.getInt("BID_RANK"));
 						dto.setAuctionEndDate(rs.getString("AUCTION_END_DATE"));
-						dto.setAuctionId(rs.getInt("AUCTION_ID"));
 		
 						result.add(dto);
 						
@@ -575,38 +484,6 @@ public class MyPageDAO {
 			
 		}	
 		
-		// 경매 최종가 
-		public int finalAuctionPrice(int auctionId) {
-			int result = 0;
-			String sql = """
-					SELECT AUCTION_FINAL_PRICE
-					FROM VW_AUCTION_WINNING_RESULT
-					WHERE AUCTION_ID=?
-					""";
-			try(Connection conn = DBCPConn.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				
-				pstmt.setInt(1, auctionId);
-				
-				try(ResultSet rs = pstmt.executeQuery())
-				{
-					if(rs.next()) {
-						result = rs.getInt("AUCTION_FINAL_PRICE");
-					}
-				}
-				
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			return result;
-			
-		}
-		
-		
-		
-//[관심상품]========================================================================================================================		
 		
 		// 내 관심 상품 리스트 
 		public List<MyWishlistDTO> myWishlistBoard(int offset, int size, int userId){
@@ -668,7 +545,7 @@ public class MyPageDAO {
 			return result;
 			
 		}
-		
+	
 		// 내 관심상품  전체 데이터 갯수
 		public int wishlistDataCount(int userId) {
 			int result = 0;
@@ -693,7 +570,7 @@ public class MyPageDAO {
 			}
 			
 			return result;
-		}	
+		}
 	
 		// 내 관심 상품 삭제
 		public int deleteWishlist(int wishId) {
@@ -715,8 +592,8 @@ public class MyPageDAO {
 			
 			
 			return result;
-		}	
-
+		}
+		
 		// 관심상품 등록
 		public int insertWishlist(int userId, int productId) {
 		    int result = 0;
@@ -754,6 +631,56 @@ public class MyPageDAO {
 		    }
 		    return result;
 		}
+		
+		
+	
+	
+	
+		// 내 패널티 리스트
+		public List<MyPenaltyDTO> myPenaltyBoard(int userId){
+			List<MyPenaltyDTO> result = new ArrayList<MyPenaltyDTO>();
+			String sql = """
+					SELECT PENALTY_ID, PENALTY_TYPE_NAME, GIVEN_SCORE, ACCUMULATED_SCORE
+					, TOTAL_SCORE, HISTORY_STATUS, PENALTY_CREATED_AT
+					, PENALTY_START_DATE, PENALTY_END_DATE
+					, PENALTY_ASSIGN_ADMIN
+					, PENALTY_CANCEL_ID, CANCEL_REASON, CANCELED_AT
+					, PENALTY_CANCEL_ADMIN
+					FROM VW_PENALTY_DETAIL_LIST
+					WHERE USER_ID = ?
+					""";
+			try(Connection conn = DBCPConn.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setInt(1, userId);
+				try(ResultSet rs = pstmt.executeQuery()){
+					while(rs.next()) {
+						MyPenaltyDTO dto = new MyPenaltyDTO();
+						dto.setPenaltyId(rs.getInt(""));
+					}
+				}
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return result;
+			
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 		// productId + userId로 찜 해제
 		public void deleteWishlistByProduct(int userId, int productId) {
@@ -770,149 +697,6 @@ public class MyPageDAO {
 		        e.printStackTrace();
 		    }
 		}
-		
-		
 
-//[패널티]========================================================================================================================		
 
-		// 내 패널티 리스트
-		public List<MyPenaltyDTO> myPenaltyBoard(int userId) {
-			List<MyPenaltyDTO> result = new ArrayList<MyPenaltyDTO>();
-			String sql = """
-					SELECT PENALTY_ID, PENALTY_TYPE_NAME, GIVEN_SCORE, ACCUMULATED_SCORE
-					, SUM(CASE WHEN PENALTY_CANCEL_ID IS NULL THEN GIVEN_SCORE ELSE 0 END) OVER() as TOTAL_SCORE
-					, HISTORY_STATUS, PENALTY_CREATED_AT
-					, PENALTY_START_DATE, PENALTY_END_DATE
-					, PENALTY_ASSIGN_ADMIN
-					, PENALTY_CANCEL_ID, CANCEL_REASON, CANCELED_AT
-					, PENALTY_CANCEL_ADMIN
-					FROM VW_PENALTY_DETAIL_LIST
-					WHERE USER_ID = ?
-					ORDER BY PENALTY_ID DESC
-					""";
-			try (Connection conn = DBCPConn.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				pstmt.setInt(1, userId);
-				try (ResultSet rs = pstmt.executeQuery()) {
-					while (rs.next()) {
-						MyPenaltyDTO dto = new MyPenaltyDTO();
-						dto.setPenaltyId(rs.getInt("PENALTY_ID"));
-						dto.setPenaltyTypeName(rs.getString("PENALTY_TYPE_NAME"));
-						dto.setGivenScore(rs.getInt("GIVEN_SCORE"));
-						dto.setAccumulatedScore(rs.getInt("ACCUMULATED_SCORE"));
-						dto.setTotalScore(rs.getInt("TOTAL_SCORE"));
-						dto.setHistoryStatus(rs.getString("HISTORY_STATUS"));
-						dto.setPenaltyCreatedAt(rs.getString("PENALTY_CREATED_AT"));
-						dto.setPenaltyStartDate(rs.getString("PENALTY_START_DATE"));
-						dto.setPenaltyEndDate(rs.getString("PENALTY_END_DATE"));
-						dto.setPenaltyAssignAdmin(rs.getInt("PENALTY_ASSIGN_ADMIN"));
-						dto.setPenaltyCancelId(rs.getInt("PENALTY_CANCEL_ID"));
-						dto.setCancleReason(rs.getString("CANCEL_REASON"));
-						dto.setCanceledAt(rs.getString("CANCELED_AT"));
-						dto.setPenaltyCancelAdmin(rs.getInt("PENALTY_CANCEL_ADMIN"));
-
-						result.add(dto);
-
-					}
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return result;
-
-		}
-
-		// 패널티 총 점수
-		public int totalPaneltyScore(int userId) {
-			int result = 0;
-			String sql = """
-					SELECT MAX(TOTAL_SCORE) AS TOTAL
-					FROM VW_PENALTY_DETAIL_LIST
-					WHERE USER_ID = ?
-					""";
-			try (Connection conn = DBCPConn.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				pstmt.setInt(1, userId);
-
-				try (ResultSet rs = pstmt.executeQuery()) {
-					if (rs.next()) {
-						result = rs.getInt("TOTAL");
-
-					}
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return result;
-
-		}
-				
-//[배송완료]========================================================================================================================		
-				
-
-				
-				
-				
-//				// 낙찰 입금 코드 찾기
-				public int findPaymentId(int auctionId) {
-					int result = 0;
-					
-					String sql = """
-							SELECT AWP.PAYMENT_ID
-							FROM AUCTION_WINNING_RESULT AWR
-							JOIN AUCTION_BID_PARTICIPATION ABP ON ABP.BID_ID = AWR.BID_ID
-							LEFT OUTER JOIN AUCTION_WINNING_PAYMENT AWP ON AWR.BID_RESULT_ID = AWP.BID_RESULT_ID
-							LEFT OUTER JOIN BID_FAILURE_HISTORY BFH ON AWR.BID_RESULT_ID = BFH.BID_RESULT_ID
-							WHERE ABP.AUCTION_ID = ? 
-							  AND BFH.BID_RESULT_ID IS NULL
-							""";
-					
-					try(Connection conn = DBCPConn.getConnection();
-						PreparedStatement pstmt = conn.prepareStatement(sql)) {
-						
-						pstmt.setInt(1, auctionId);
-						
-						try(ResultSet rs = pstmt.executeQuery()){
-							if(rs.next()) {
-								result = rs.getInt("PAYMENT_ID");
-							}
-						}
-					}catch (Exception e) {
-						e.printStackTrace();
-					}
-					
-					return result;
-					
-				}
-				
-//				// 배송완료
-				public int shippingOk(int paymentId) {
-					int result = 0;
-				    String sql = """
-				            INSERT INTO DELIVERY_COMPLETED(SHIPPING_ID, PAYMENT_ID)
-							VALUES(SHIPPING_SEQ.NEXTVAL, ?)
-				            """;
-				    try (Connection conn = DBCPConn.getConnection();
-				         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				       
-				    	pstmt.setInt(1, paymentId);
-				        result = pstmt.executeUpdate();
-				    } catch (Exception e) {
-				        e.printStackTrace();
-				    }
-				    return result;
-					
-				}
-				
-				
-				
-				
 }
-
-
-
-
-
-

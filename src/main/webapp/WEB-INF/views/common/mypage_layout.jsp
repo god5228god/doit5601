@@ -102,7 +102,7 @@ $(function() {
         <i class="bi bi-box-seam me-2"></i>내 등록 상품
     </a>
 	 <a href="${pageContext.request.contextPath}/user/products" class="list-group-item list-group-item-action py-3 menu-link">
-        <i class="bi bi-box-seam-fill me-2"></i>내 낙찰 상품
+        <i class="bi bi-box-seam me-2"></i>내 낙찰 상품
     </a>
     <div class="list-group-item p-0 border-0">
         <a href="#auctionSubmenu" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3 main-menu collapsed">
@@ -131,7 +131,7 @@ $(function() {
         <i class="bi bi-exclamation-octagon me-2"></i>내 패널티 내역
     </a>
         <a href="${pageContext.request.contextPath}/payment.history" class="list-group-item list-group-item-action py-3 menu-link">
-        <i class="bi bi-cash-coin me-2"></i>내 머니 내역
+        <i class="bi bi-exclamation-octagon me-2"></i>내 머니 내역
     </a>
 
     <div class="list-group-item p-0 border-0">

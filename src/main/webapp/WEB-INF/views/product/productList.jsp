@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         .product-card { cursor: pointer; }
-        .product-card img { aspect-ratio: 1/1; object-fit: cover; width: 100%; }
+        .product-card img { height: 180px; object-fit: cover; }
         .navbar-brand { font-weight: 700; color: #4F46E5 !important; }
 
         .page-header { background: #f8f9fa; padding: 3rem 0 2rem 0; }

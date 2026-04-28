@@ -130,16 +130,6 @@ function cancelPenalty(penaltyId) {
         <div>
 			${ pageElement }
         </div>
-        
-        <!-- 돌아가기 버튼 영역 -->
-        <div class="d-flex justify-content-center mt-0 py-5">
-        	<%--
-            <button type="button" class="btn btn-secondary px-5 fw-bold" onclick="location.href='mainDashBoard.jsp'">
-            --%>
-            <button type="button" class="btn btn-secondary px-5 fw-bold" onclick="location.href='${ pageContext.request.contextPath }/admin'">
-                대시보드로 돌아가기
-            </button>
-        </div>
     </div>
 </body>
 </html>

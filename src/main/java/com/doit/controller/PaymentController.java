@@ -1,7 +1,6 @@
 package com.doit.controller;
 
 import java.io.IOException;
-import java.util.Date;
 
 import com.doit.dao.ProductBuyDAO;
 import com.doit.dto.BidActionDTO;
@@ -43,28 +42,16 @@ public class PaymentController extends HttpServlet
 		if(uri.endsWith("/charge"))
 		{
 			charge(request, response);
-			return;
 		}
 		
 		if(uri.endsWith("/success"))
 		{
 			success(request, response);
-			return;
 		}
-		if(uri.endsWith("/successPage"))
-		{
-			successPage(request, response);
-			return;
-		}
+		
 		if(uri.endsWith("/takefail"))
 		{
 			takefail(request, response);
-			return;
-		}
-		if(uri.endsWith("/takefailSuccess"))
-		{
-			takefailSuccess(request, response);
-			return;
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/money/moneyChargeHome.jsp");
@@ -166,171 +153,48 @@ public class PaymentController extends HttpServlet
 		ProductBuyDAO dao = new ProductBuyDAO();
 		BidActionDTO dto = new BidActionDTO(userId, bid, amount);
 		
-		
-		Date today = new java.util.Date();
-		
-		request.setAttribute("today",today );
+		request.setAttribute("today", new java.util.Date());
 		
 		int result = dao.paymentBid(dto);
-		System.out.println("결제가격"+dto.getAmount());
-		System.out.println("결제낙찰"+dto.getBidResultId());
-		System.out.println("결제유저"+dto.getUserId());
+		System.out.println(dto.getAmount());
+		System.out.println(dto.getBidResultId());
+		System.out.println(dto.getUserId());
 		System.out.println(result);
-		
-		String img =  request.getParameter("img");
-		String title = request.getParameter("title");
-		String grade = request.getParameter("grade");
-		String manudacturer = request.getParameter("manudacturer");
-		String price = request.getParameter("price");
-
-		String url = "?bid="+bid+"&price="+price;
 		
 		if(result > 0)
 		{
 			request.setAttribute("massage", "결제가 완료되었습니다!");
-			//url += "&type=1";
-			//response.sendRedirect(cp+"/payment/successPage"+url);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/mypage/success.jsp");
 			dispatcher.forward(request, response);
-			return;
 		}else
 		{
 			request.setAttribute("massage", "결제가 실패하였습니다..");
-			//url += "&type=2";
-			//response.sendRedirect(cp+"/payment/successPage"+url);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/mypage/success.jsp");
 			dispatcher.forward(request, response);
-			return;
 		}
 		
 		
 		
-	}
-	
-	protected void successPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		
-		Date today = new java.util.Date();
-		
-		request.setAttribute("today",today );
-		
-		String img =  request.getParameter("img");
-		String title = request.getParameter("title");
-		String grade = request.getParameter("grade");
-		String manudacturer = request.getParameter("manudacturer");
-		String price = request.getParameter("price");
-		
-		request.setAttribute("img", img);
-		request.setAttribute("title", title);
-		request.setAttribute("grade", grade);
-		request.setAttribute("manudacturer", manudacturer);
-		request.setAttribute("price", price);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/mypage/success.jsp");
-		dispatcher.forward(request, response);
 	}
 	
 	protected void takefail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		String cp = request.getContextPath();
-		HttpSession session = request.getSession();
-		UserInfoDTO user = (UserInfoDTO) session.getAttribute("loginUser");
-
-		if (user == null) { 
-            response.sendRedirect(cp + "/user/auth/login");
-            return;
-        }
-		int userId = user.getUserId();
-		
-		String bidStr = request.getParameter("bid");
-		String amountStr = request.getParameter("price");
-		
-		int bid = 1; 
-
-		if (bidStr != null && !bidStr.trim().isEmpty()) {
-		    try {
-		    	bid = Integer.parseInt(request.getParameter("bid"));
-		    } catch (NumberFormatException e) {
-		       
-		    	bid = 1;
-		    }
-		}
-		
-		int amount = 1; 
-
-		if (amountStr != null && !amountStr.trim().isEmpty()) {
-		    try {
-		    	amount = Integer.parseInt(request.getParameter("price"));
-		    } catch (NumberFormatException e) {
-		       
-		    	amount = 1;
-		    }
-		}
-		
-		request.setAttribute("userId", userId);
-		request.setAttribute("bidId", bid);
-		request.setAttribute("amount", amount);
-		
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/mypage/takefail.jsp");
-		dispatcher.forward(request, response);
-		
-	}
-	
-	protected void takefailSuccess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		String cp = request.getContextPath();
-		HttpSession session = request.getSession();
-		UserInfoDTO user = (UserInfoDTO) session.getAttribute("loginUser");
-
-		if (user == null) { 
-            response.sendRedirect(cp + "/user/auth/login");
-            return;
-        }
-		int userId = user.getUserId();
-		
-		String bidStr = request.getParameter("bid");
-		String amountStr = request.getParameter("price");
-		
-		int bid = 1; 
-
-		if (bidStr != null && !bidStr.trim().isEmpty()) {
-		    try {
-		    	bid = Integer.parseInt(request.getParameter("bid"));
-		    } catch (NumberFormatException e) {
-		       
-		    	bid = 1;
-		    }
-		}
-		
-		int amount = 1; 
-
-		if (amountStr != null && !amountStr.trim().isEmpty()) {
-		    try {
-		    	amount = Integer.parseInt(request.getParameter("price"));
-		    } catch (NumberFormatException e) {
-		       
-		    	amount = 1;
-		    }
-		}
+		Integer userId = Integer.parseInt(request.getParameter("user"));
+		Integer bid = Integer.parseInt(request.getParameter("bid"));
+		Integer amount = Integer.parseInt(request.getParameter("price"));
 		
 		ProductBuyDAO dao = new ProductBuyDAO();
 		
-		BidActionDTO dto = new BidActionDTO(userId, bid, amount);
 		
-		int result = dao.failBid(dto);
 		
-		String takefailYN = "";
+		request.setAttribute("massage", "결제가 성공하였습니다..");
 		
-		if(result > 0)
-		{
-			takefailYN = "Y";
-		}else
-		{
-			takefailYN = "N";
-		}
-		System.out.println("takefailYN:"+takefailYN);
-		response.sendRedirect(cp+"/user/products?takefailYN="+takefailYN);
 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/mypage/takefail.jsp");
+		dispatcher.forward(request, response);
+		
+		
+		
+		
 	}
 }

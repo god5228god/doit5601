@@ -35,7 +35,7 @@ public class AuctionCancelController extends HttpServlet {
         int result = dao.cancelAuction(auctionId, userNo, cancelReason);
 
         if (result > 0) {
-            resp.sendRedirect(req.getContextPath() + "/user/auctions/active"); 
+            resp.sendRedirect(req.getContextPath() + "/user/mypage/auctionStatus"); 
         } else {
             resp.sendRedirect(req.getContextPath() + "/user/mypage/auctionStatus?error=cancel_fail");
         }

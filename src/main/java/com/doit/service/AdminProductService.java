@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.doit.dao.AdminProductDAO;
-import com.doit.dao.ProductDAO;
 import com.doit.dto.ProductDTO;
 
 public class AdminProductService
 {
 //-- 속성 --//
-	private final AdminProductDAO adminProductDao;
+	private final AdminProductDAO apDao;
 	
 //-- 생성자 --//
 	public AdminProductService()
 	{
-		this.adminProductDao = new AdminProductDAO();
+		this.apDao = new AdminProductDAO();
 	}
 	
 //-- 메서드 --//
@@ -25,7 +24,7 @@ public class AdminProductService
 	{
 		int result = 0;
 		
-		result = adminProductDao.selectProductCount(productStatus);
+		result = apDao.selectProductCount(productStatus);
 		
 		return result;
 	}// getTotalProductCount() END
@@ -36,7 +35,7 @@ public class AdminProductService
 	{
 		List<ProductDTO> result = new ArrayList<>();
 		
-		result = adminProductDao.selectProductList(productStatus, page, sizePerPage);
+		result = apDao.selectProductList(productStatus, page, sizePerPage);
 		
 		return result;
 	}
@@ -46,16 +45,7 @@ public class AdminProductService
 	{
 		int result = 0;
 		
-		result = adminProductDao.updateProductHide(productId);
-		
-		return result;
-	}
-	
-	
-	// 상품 상세 조회
-	public ProductDTO getProductDetail(int productId)
-	{
-		ProductDTO result = adminProductDao.selectProductDetail(productId);
+		result = apDao.updateProductHide(productId);
 		
 		return result;
 	}

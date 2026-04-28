@@ -24,26 +24,17 @@
 body
 {
 	margin-top:50px;
-	margin:50px auto 0 auto !important;
 	
 }
-
 h1,h2
 {
-	font-size: 20px !important;
-	font-weight: bold !important;
+	font-size: 20px;
+	font-weight: bold;
 }
 .body
 {
-	margin:30px auto !important;
+	margin:auto;
 	width:80%;
-	
-}
-.b
-{
-	margin-left:180px;
-	width:1032px;
-	height: 1400px;
 }
 .body div
 {
@@ -52,7 +43,6 @@ h1,h2
 
 .box
 {
-
 	width:80%;
 	margin:auto;
 	position: relative;
@@ -206,7 +196,14 @@ hr
 	margin-bottom: 20px;
 	box-shadow: 0 0 3px rgba(0,0,0,0.4);
 }
-
+/* .cashtot
+{
+	padding: 20px 30px 30px 30px;
+	border: 1px solid silver;
+	border-radius: 7px;
+	width: 200px;
+	height: 300px;
+} */
 .title
 {
 	font-size: 20px;
@@ -261,16 +258,18 @@ window.onload = function() {
 
     const endDateStr = hiddenInput.value; // 예: "2024-11-13 00:00"
     
-    
+    // 1. 날짜 문자열을 숫자로 쪼갭니다 (하이픈, 공백, 콜론을 기준으로 분리)
+    // 결과: parts = ["2024", "11", "13", "00", "00"]
     const parts = endDateStr.split(/[- :]/);
     
-   
+    // 2. Date 객체 생성 (Month는 0부터 시작하므로 -1)
+    // Date(년, 월-1, 일, 시, 분)
     const endDate = new Date(parts[0], parts[1] - 1, parts[2], parts[3], parts[4]);
     
-   
+    // 3. 하루 더하기
     endDate.setDate(endDate.getDate() + 1);
     
-   
+    // 4. 화면 출력 (패딩 처리)
     const year = endDate.getFullYear();
     const month = String(endDate.getMonth() + 1).padStart(2, '0');
     const day = String(endDate.getDate()).padStart(2, '0');
@@ -280,7 +279,7 @@ window.onload = function() {
 
     document.getElementById('endDate').innerText = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
-    
+    // 2. 실시간 카운트다운 (낙찰 종료 시간 기준)
     const targetDate = endDate.getTime(); 
 
     const timer = setInterval(function() {
@@ -391,13 +390,12 @@ window.onload = function() {
 			postDetail.focus();
 			bol = true;
 		}
-		let currentPrice = parseInt("${money-detail.currentPrice}");
+		let currentPrice = ${money-detail.currentPrice};
+		let myMoney = ${money};
 		
-		
-		if(currentPrice < 0)
+		if(myMoney - currentPrice < 0)
 		{
 			alert("보유금액이 부족합니다 \n충전 후 결제해주세요");
-			bol = true;
 		}
 		
 		if(bol)
@@ -406,7 +404,6 @@ window.onload = function() {
 		}
 		
 		document.formRight.action ="${pageContext.request.contextPath}/payment/success"
-		document.formRight.method ="GET";
 		document.formRight.submit();
 		
 		
@@ -462,21 +459,19 @@ window.onload = function() {
 		<input type="hidden" name="bid" value="${detail.bidResult }">
 		<input type="hidden" name="user" value="${detail.userId }">
 	</form>
-
 	<div class="body">
-	<div class="b">
 		<div class="box">
 			<div class="item">
 				<h1>낙찰 구매 상품</h1>
 				<hr />
 				<div class="itemimg">
-					<img src="${detail.img }<!-- https://image2.1004gundam.com/item_images/goods/380/1376406523.JPG -->" alt="제품이미지" />
+					<img src="<%-- ${detail.img } --%>https://image2.1004gundam.com/item_images/goods/380/1376406523.JPG" alt="제품이미지" />
 				</div>
 				<div class="itemtext">
 					<span class="title"> ${detail.auctionTitle } </span> <br /> <span class="condition">
 						상태: ${detail.gradeName } / 제조사: ${detail.manudacturerName} </span><br /> <br /> <span class="date"> <span
-						class="tt">낙찰일</span> <span class="condition">${fn:substring(detail.auctionEndDate,0,fn:length(detail.auctionEndDate)-8)}</span> <br /> <span class="tt" >결제마감일</span>
-						<span class="endDate condition">${fn:substring(detail.auctionStartDate,0,fn:length(detail.auctionStartDate)-8) }</span> <br /> <span class="tt" >남은시간</span> <span id="endTime condition"></span><br />
+						class="tt">낙찰일</span> <span class="condition">${detail.auctionEndDate }</span> <br /> <span class="tt" >결제마감일</span>
+						<span id="endDate condition"></span> <br /> <span class="tt" >남은시간</span> <span id="endTime condition"></span><br />
 					</span> <span class="countmoney"> <span class="tt">입찰가</span>
 						<span class="condition">${detail.maxPrice } 원</span><br /> <span class="tt">낙찰가</span> <span class="condition">${detail.currentPrice } 원</span><br />
 					</span>
@@ -571,7 +566,6 @@ window.onload = function() {
 			</div>
 		</div>
 	</div>
-	</div>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
 </body>
 </html>

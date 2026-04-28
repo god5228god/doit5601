@@ -1,6 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -64,20 +62,11 @@
 
     <div class="d-flex align-items-start" style="gap: 50px;">
         
-	<div style="flex: 0 0 450px;"> 
-	    <div class="ratio ratio-1x1 bg-light border d-flex align-items-center justify-content-center overflow-hidden" style="border-radius: 12px;">
-	        <c:choose>
-	            <c:when test="${not empty product.imagePath1}">
-	                <img src="${ctx}/${product.imagePath1}" 
-	                     style="width: 100%; height: 100%; object-fit: cover;" 
-	                     alt="상품 이미지">
-	            </c:when>
-	            <c:otherwise>
-	                <span class="text-muted fw-bold">상품 대표 이미지 없음</span>
-	            </c:otherwise>
-	        </c:choose>
-	    </div>
-	</div>
+        <div style="flex: 0 0 450px;"> 
+            <div class="ratio ratio-1x1 bg-light border d-flex align-items-center justify-content-center">
+                <span class="text-muted fw-bold">상품 대표 이미지</span>
+            </div>
+        </div>
 
       <div class="flex-grow-1">
     	<form action="${pageContext.request.contextPath}/user/mypage/auction" method="post">

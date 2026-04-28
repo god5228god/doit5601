@@ -14,28 +14,17 @@
 	href="${pageContext.request.contextPath}/resource/css/biditem.css">
 
 <style type="text/css">
-html {
-	min-height: 100vh !important;
-}
 
 body {
 	margin-top: 50px;
 }
-.body
-{
-	padding: 30px 20px 0 20px;
-}
-.item:hover {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
-    transform: translateY(-1px); 
-    border-color: #dee2e6 !important; 
-}
-.up {
 
+.up {
+	margin-top: 50px;
 	border-radius: 7px;
 	border: 1px solid silver;
 	font-size: 16px;
-	padding: 10px !important;
+	padding: 60px !important;
 }
 
 a, a:visited {
@@ -49,13 +38,13 @@ h1 {
 }
 
 .box {
+	border: 1px solid silver;
 	height: 100px;
 	width: 90%;
 	border-radius: 7px;
 	position: relative;
 	margin: 30px auto;
 	text-align: center;
-	background-color:#F8F8F8; 
 }
 
 .tot {
@@ -66,89 +55,42 @@ h1 {
 	padding: 10px;
 	height: 100%;
 	width: 100%;
-	font-family: small;
-	font-weight: bold;
-}
-.bid:hover
-{
-	border-radius: 40px;
-	background-color:#F3F3F3; 
-}
-.bid hr
-{
-	margin-top: 7px;
 }
 
 .bid>span {
 	display: block;
 }
-.bidcount
-{
-	width: 100px;
-	margin-left:0px;
-}
+
 .view {
 	height: 70%;
 	margin-top: 25px;
 }
 
 .box3 {
-	border: 1px solid #FAFAFA;
+	border: 1px solid silver;
 	border-radius: 7px;
 	width: 90%;
 	text-align: left;
-	padding: 30px;
+	padding: 50px;
 	margin: 0 auto;
 }
 
 .item {
-	vertical-align: top !important;
-	border-radius: 7px !important;
-	border: 1px solid silver !important;
-	margin: 18px !important;
-	display: inline-block !important;
-	width: 200px !important;
-	height: 260px !important;
-}
-
-.itemtext {
-	display: block;
-	font-weight: bold;
-	text-align: center;
-	width: 100%;
-	padding: 3px;
-	margin-top: 3px;
-	align-content: center;
-	margin-top: 9px;
-	height: 70px;
-}
-.po
-{
-	margin-top: -1px;
-	align-items: center !important;
+	vertical-align: top;
+	border-radius: 7px;
+	border: 1px solid silver;
+	margin: 10px;
+	display: inline-block;
+	width: 200px;
+	height: 255px;
 }
 
 hr {
 	margin: 10px;
 }
 
-.itemtext span {
-	display: inline-block !important;
-	display: flex;
-}
-.itemtext div
-{
-	display: inline-block !important;
-}
-.itemtext > div {
-    display: flex !important;
-    justify-content: space-between; /* 구조를 왼쪽 끝과 오른쪽 끝으로 배치 */
-    align-items: right;
-    font-size:15px;
-}
-.title {
+.item span {
 	display: block;
-	height: 46px;
 }
 
 .item img {
@@ -157,11 +99,7 @@ hr {
 	width: 100%;
 	height: 100%;
 }
-.position
-{
-	font-family:small;
-	margin-right:8px;
-}
+
 .imgwrap {
 	width: 100%;
 	height: 170px;
@@ -189,18 +127,12 @@ hr {
 	font-weight: bold;
 	padding: 1px;
 }
+
 </style>
 
 <script type="text/javascript">
-
+/* 기존 스크립트 유지 */
 function con(userId, bidId) {
-	
-
-	if (event) {
-        event.stopPropagation();
-        event.preventDefault();
-	}
-	
     if (!confirm("구매를 확정하시겠습니까?")) return;
     fetch("${pageContext.request.contextPath}/user/purchaseConfirmAction?bidId=" + bidId + "&userId=" + userId)
     .then(response => response.text())
@@ -284,9 +216,9 @@ function con(userId, bidId) {
 								</select>
 							</form>
 							<div class="d-flex align-items-center ms-3">
-								<input type="text" class="form-control" placeholder="시작일"
+								<input type="text" class="form-control" placeholder="First day"
 									style="width: 150px;"> <span class="mx-2">~</span> <input
-									type="text" class="form-control" placeholder="종료일"
+									type="text" class="form-control" placeholder="Last day"
 									style="width: 150px;">
 								<button type="button" class="btn btn-dark ms-3">검색</button>
 							</div>
@@ -294,42 +226,39 @@ function con(userId, bidId) {
 
 						<div class="box3 shadow-sm">
 							<c:forEach var="bid" items="${winnerList}">
-								<a
-									href="${pageContext.request.contextPath }/product/detail?productId=${bid.productId}">
+								<a href="${pageContext.request.contextPath }/product/detail?productId=${bid.productId}">
 									<div class="item shadow-sm">
 										<div class="imgwrap">
 											<img src="${bid.img}" alt="상품이미지" />
 										</div>
 										<div class="itemtext">
-											<span class="title">${bid.auctionTitle}</span>
-											<div class="po">
-												<span class="bidcount">${bid.finalPrice} 원</span>
-												<div class="position">
-													<c:choose>
-														<c:when test="${bid.fail == 'Y'}">
-															<span style="background-color:#faeceb; border-radius: 5px; padding:3px;">${bid.failType == 1 ? '기한만료' : '낙찰취소'}</span>
-														</c:when>
-														<c:when test="${bid.confirm == 'Y'}">
-															<span style="background-color:#f2f2f2; border-radius: 5px; padding:3px;">확정완료</span>
-														</c:when>
-														<c:when test="${bid.shipping == 'Y'}">
-															<span id="confirmContainer_${bid.winnerBidId}">
-																<button type="button" class="btn btn-light btn-sm"
-																	onclick="con(${bid.winnerUserId},${bid.winnerBidId})">구매확정</button>
-															</span>
-														</c:when>
-														<c:when
-															test="${bid.paymentStat == 'Completed' && bid.shipping == 'N'}">
-															<span style="background-color:#f2f2f2; border-radius: 5px; padding:3px;">배송대기</span>
-														</c:when>
-														<c:when test="${bid.paymentStat == 'Pending'}">
-															<a
-																href="${pageContext.request.contextPath}/payment.detail?userId=${bid.winnerUserId}&resultId=${bid.winnerBidId}">
-																<button type="button" class="btn btn-light btn-sm">결제하기</button>
-															</a>
-														</c:when>
-													</c:choose>
-												</div>
+											<span class="title">${bid.auctionTitle}</span> <span
+												class="bidcount">${bid.finalPrice} 원</span>
+											<div class="position">
+												<c:choose>
+													<c:when test="${bid.fail == 'Y'}">
+														<span>${bid.failType == 1 ? '기한만료' : '낙찰취소'}</span>
+													</c:when>
+													<c:when test="${bid.confirm == 'Y'}">
+														<span>확정완료</span>
+													</c:when>
+													<c:when test="${bid.shipping == 'Y'}">
+														<span id="confirmContainer_${bid.winnerBidId}">
+															<button type="button" class="btn btn-light btn-sm"
+																onclick="con(${bid.winnerUserId},${bid.winnerBidId})">구매확정</button>
+														</span>
+													</c:when>
+													<c:when
+														test="${bid.paymentStat == 'Completed' && bid.shipping == 'N'}">
+														<span>배송대기</span>
+													</c:when>
+													<c:when test="${bid.paymentStat == 'Pending'}">
+														<a
+															href="${pageContext.request.contextPath}/payment.detail?userId=${bid.winnerUserId}&resultId=${bid.winnerBidId}">
+															<button type="button" class="btn btn-light btn-sm">결제하기</button>
+														</a>
+													</c:when>
+												</c:choose>
 											</div>
 										</div>
 									</div>
@@ -354,24 +283,6 @@ function con(userId, bidId) {
 			</section>
 		</div>
 	</main>
-	
-	<c:if test="${param.takefailYN != null }">
-		<c:choose>
-			<c:when test="${param.takefailYN == 'Y' }">
-				<script type="text/javascript">
-					alert("낙찰취소가 등록되었습니다\n구매자 패널티가 1점 추가됩니다");
-					history.replaceState(null,null,location.pathname);
-				</script>
-			</c:when>
-			<c:when test="${param.takefailYN == 'N' }">
-				<script type="text/javascript">
-					alert("낙찰취소에 실패했습니다.\n다시 시도해주세요");
-					history.replaceState(null,null,location.pathname);
-				</script>	
-			</c:when>
-		</c:choose>
-	</c:if>
-
 
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>

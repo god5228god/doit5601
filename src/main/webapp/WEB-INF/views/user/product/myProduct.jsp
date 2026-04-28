@@ -153,7 +153,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; margin: 0; }
 									       <c:when test="${empty dto.auctionId || dto.auctionId == 0}">
 									           경매등록
 									       </c:when>
-									       <c:when test="${dto.isFinished == '진행중'}">								       
+									       <c:when test="${dto.isFinished == '진행중'}">
 									           경매중
 									       </c:when>
 									       <c:otherwise>

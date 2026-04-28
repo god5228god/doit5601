@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>마이페이지</title>
+    <title>마이페이지 - Auction PKG</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
    	<style type="text/css">
@@ -83,16 +83,17 @@
 				</div>
 
 				<div class="row g-3">
-					<div class="col-md-6" onclick="location.href='${pageContext.request.contextPath}/payment.history'">
+					<div class="col-md-6" onclick="location.href='${pageContext.request.contextPath}/'">
 						<div class="card stat-card shadow-sm p-4 bg-white border-start border-2 border-primary" style="border-color: #120e63 !important;">
 							<div class="d-flex justify-content-between align-items-center">
 								<div>
 									<small class="text-muted d-block mb-1">사용 가능한 보유머니</small>
 									<h3 class="fw-bold txtColor mb-0">
-									<fmt:formatNumber value="${currentMoney}" type="number" />
+									<fmt:formatNumber value="${loginUser.totalMoney}" type="number" />
 									
 									원</h3>
 								</div>
+								<div class="btn btn-primary rounded-pill px-3">충전</div>
 							</div>
 						</div>
 					</div>
@@ -101,7 +102,7 @@
 							<div class="d-flex justify-content-between align-items-center">
 								<div>
 									<small class="text-muted d-block mb-1">나의 패널티 점수</small>
-									<h3 class="fw-bold text-danger mb-0">${paneltyScore }점</h3>
+									<h3 class="fw-bold text-danger mb-0">1점</h3>
 								</div>
 								<div class="text-muted small">이력 확인 <i class="bi bi-chevron-right"></i></div>
 							</div>

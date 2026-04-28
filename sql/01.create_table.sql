@@ -271,14 +271,6 @@ create table product (
 
 
 
-ALTER TABLE product
-MODIFY (
-    work_name VARCHAR2(1000),
-    character_name varchar2(1000),
-    product_release_name varchar2(1000),
-    product_alias varchar2(1000)
-);
-
 
 -- ○ 18. 추가 이미지
 create table product_image (

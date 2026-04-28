@@ -161,7 +161,7 @@
     </div>
     
 	<div class="d-flex justify-content-end mb-5">
-        <a href="${pageContext.request.contextPath}/admin" class="btn btn-wf">돌아가기</a>
+        <a href="${pageContext.request.contextPath}/JY/mainDashBoard.jsp" class="btn btn-wf">돌아가기</a>
     </div>
 </div>
 

@@ -152,7 +152,7 @@ public class AdminPenaltyDAO
 	
 	
 	// 패널티 취소
-	public int insertPenaltyCancel(PenaltyHistoryDTO phDto)
+	public int insertPenaltyCancel(int penaltyId, int adminAccountId, String cancelReason)
 	{
 		int result = 0;
 		
@@ -162,9 +162,9 @@ public class AdminPenaltyDAO
 			CallableStatement cstmt = conn.prepareCall(sql);
 		   )
 		{
-			cstmt.setInt(1, phDto.getPenaltyId());
-			cstmt.setInt(2, phDto.getAdminAccountId());
-			cstmt.setString(3, phDto.getCancelReason());
+			cstmt.setInt(1, penaltyId);
+			cstmt.setInt(2, adminAccountId);
+			cstmt.setString(3, cancelReason);
 			
 			result = cstmt.executeUpdate();
 		}

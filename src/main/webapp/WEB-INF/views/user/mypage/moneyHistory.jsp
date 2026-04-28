@@ -43,7 +43,6 @@ a:visited, a {
 	margin-top: 20px;
 	margin-bottom: 20px;
 	display: flex;
-	width: 900px;
 }
 
 h1 {
@@ -65,8 +64,8 @@ h1 {
 }
 
 .btn-dark {
-	margin-left: 20px !important;
-	flex-shrink: 0;
+	margin-left: 20px;
+	width: 80px;
 }
 
 .tot {
@@ -81,24 +80,14 @@ h1 {
 	padding: 10px;
 	height: 100px;
 	width: 30%;
-	border: 2px solid #FAFAFA;
+	border: 2px solid silver;
 	margin: 10px;
 	text-align: center;
 	border-radius: 8px;
-	background-color: #FAFAFA;
-	font-family: small;
-	font-weight: bold;
 }
-.bid hr
-{
-	margin-top: 7px;
-}
+
 .bid>span {
 	display: block;
-}
-.form-select
-{
-	width: 160px !important;
 }
 
 table {
@@ -109,32 +98,20 @@ table {
 }
 
 th {
-	border: 1px solid silver !important;
-	height: 42px;
-	back
+	border: 1px solid silver;
+	border-radius: 10px;
+	height: 40px;
 }
 
 tr {
-	height: 47px;
+	height: 40px;
+	border-bottom: 1px solid silver;
 	border: 1px solid silver;
 }
-
-tbody tr:hover
-{
-	background-color: #F6F6F6;
-}
-td
-{
-	font-family: small;
-}
-
 
 hr {
 	margin-top: 10px;
 	margin-bottom: 15px;
-}
-.p-4 {
-    min-height: auto !important; 
 }
 </style>
 
@@ -192,11 +169,6 @@ hr {
 							</select> <select class="form-select" onchange="change()" name="part">
 								<option selected value="">상세 구분</option>
 								<option value="1" ${part == 1 ? 'selected' : ''}>결제</option>
-								<option value="2" ${part == 2 ? 'selected' : ''}>결제 대금</option>
-								<option value="3" ${part == 3 ? 'selected' : ''}>판매 보증금 납부</option>
-								<option value="4" ${part == 4 ? 'selected' : ''}>판매 보증금 환급</option>
-								<option value="5" ${part == 5 ? 'selected' : ''}>구매 보증금 납부</option>
-								<option value="6" ${part == 6 ? 'selected' : ''}>판매 보증금 환급</option>
 								<option value="8" ${part == 8 ? 'selected' : ''}>충전</option>
 							</select>
 

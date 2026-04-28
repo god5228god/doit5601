@@ -197,10 +197,6 @@ BEGIN
     IF V_CNT > 0 THEN
         RAISE_APPLICATION_ERROR(-20016, '진행 중인 경매가 존재합니다.');
     END IF;
-    
-    --찜 삭제
-    DELETE FROM WISHLIST 
-    WHERE PRODUCT_ID = P_PRODUCT_ID;
 
     -- 이미지 테이블 삭제
     DELETE FROM PRODUCT_IMAGE

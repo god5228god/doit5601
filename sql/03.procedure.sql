@@ -143,8 +143,7 @@ BEGIN
             RAISE_APPLICATION_ERROR(-20014, '필수 입력 항목이 누락되었습니다.');
 END;
 /
-select *
-from user_account
+
 -- ○ 2. 회원탈퇴 프로시저
 CREATE OR REPLACE PROCEDURE PRC_USER_DELETE
 ( P_USER_ID IN USERS.USER_ID%TYPE
@@ -454,6 +453,7 @@ CREATE OR REPLACE PROCEDURE PRC_PRODUCT_DELETE
 IS
     V_CNT NUMBER;
 BEGIN
+    -- 파라미터 체크
     IF P_PRODUCT_ID IS NULL THEN
         RAISE_APPLICATION_ERROR(-20023, '삭제할 상품 번호가 입력되지 않았습니다.');
     END IF;
@@ -462,6 +462,7 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20010, '회원 정보가 유효하지 않습니다.');
     END IF;
 
+    -- 상품 존재 및 본인 여부 확인
     SELECT COUNT(*) INTO V_CNT
     FROM PRODUCT
     WHERE PRODUCT_ID = P_PRODUCT_ID AND USER_ID = P_USER_ID;
@@ -470,6 +471,8 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20024, '삭제 권한이 없거나 이미 존재하지 않는 상품입니다.');
     END IF;
 
+    -- 진행 중인 경매 여부 확인 (함수 FN_IS_AUCTION_FINISHED 활용)
+    -- 해당 상품으로 등록된 경매들 중, 함수 결과 0 = 경매중
     SELECT COUNT(*) INTO V_CNT
     FROM AUCTION_REGISTRATION
     WHERE PRODUCT_ID = P_PRODUCT_ID
@@ -478,10 +481,6 @@ BEGIN
     IF V_CNT > 0 THEN
         RAISE_APPLICATION_ERROR(-20016, '진행 중인 경매가 존재합니다.');
     END IF;
-
-    -- 신고 데이터 삭제 
-    DELETE FROM PRODUCT_REPORT
-    WHERE PRODUCT_ID = P_PRODUCT_ID;
 
     -- 이미지 테이블 삭제
     DELETE FROM PRODUCT_IMAGE
@@ -633,7 +632,6 @@ BEGIN
     ) VALUES (
         AUCTION_CANCEL_SEQ.NEXTVAL, P_AUCTION_ID, P_CANCEL_REASON, SYSDATE
     );
-
 
     COMMIT; 
 EXCEPTION
@@ -905,7 +903,7 @@ BEGIN
         WHEN OTHERS
         THEN ROLLBACK;
         DBMS_OUTPUT.PUT_LINE('예외 발생 :'|| SQLERRM);
-      --  RAISE_APPLICATION_ERROR(-20099,'실패');
+        RAISE_APPLICATION_ERROR(-20099,'실패');
 END;
 /
 
@@ -1083,7 +1081,7 @@ BEGIN
         WHEN OTHERS
         THEN ROLLBACK;
         DBMS_OUTPUT.PUT_LINE('예외 발생 :'|| SQLERRM);
-        --RAISE_APPLICATION_ERROR(-20099,'실패');
+        RAISE_APPLICATION_ERROR(-20099,'실패');
 END;
 /
 

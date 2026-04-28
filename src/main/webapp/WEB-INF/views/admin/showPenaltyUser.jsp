@@ -72,7 +72,7 @@
 <div class="container mt-5">
     <div class="row mb-4 align-items-end">
         <div class="col-md-6">
-            <h1 class="fw-bold text-danger">제재 내역 조회</h1>
+            <h1 class="fw-bold text-danger">제재 유저 조회</h1>
             <p class="text-muted">전체 제재 내역: <span class="text-danger fw-bold">${totalCount}</span>건</p>
         </div>
         <div class="col-md-6">
@@ -172,7 +172,7 @@
     </div>
     
     <div class="d-flex justify-content-end mb-5">
-        <a href="${pageContext.request.contextPath}/admin" class="btn btn-wf">돌아가기</a>
+        <a href="${pageContext.request.contextPath}/JY/mainDashBoard.jsp" class="btn btn-wf">돌아가기</a>
     </div>
 </div>
 

@@ -83,21 +83,6 @@
 	    border: 1px solid #dee2e6 !important;
 	    color: #6c757d !important;
 	}
-	
-	
-	/* 제목 클릭용 링크 스타일 */
-	.product-link {
-	    text-decoration: none;    /* 밑줄 제거 */
-	    color: inherit;           /* 부모(td)의 글자색 상속 */
-	    display: inline-block;    /* 클릭 영역 확보 */
-	    transition: all 0.2s ease; /* 부드러운 변화 효과 */
-	}
-	
-	.product-link:hover {
-	    color: #0d6efd;           /* 호버 시 강조 색상 (부트스트랩 기본 파란색) */
-	    text-decoration: underline; /* 호버 시에만 밑줄 표시 */
-	    cursor: pointer;          /* 마우스 커서 포인터로 변경 */
-	}
 </style>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script type="text/javascript">
@@ -107,18 +92,6 @@
 			let url = "${ pageContext.request.contextPath }/admin/product/list";
 			
 			url = url + "?" + "productStatus=" + $(this).val();
-			
-			location.href = url;
-		});
-		
-		
-		$('.product-link').click(function() {
-			let productId = $(this).data("id");
-			
-			let url = "${ pageContext.request.contextPath }/admin/product/detail";
-			url = url + "?";
-			url = url + "productId=" + productId;
-			url = url + "&" + "prevUrl=" + location.href;
 			
 			location.href = url;
 		});
@@ -187,7 +160,6 @@
         <div class="filter-container d-flex align-items-center justify-content-between">
 		    <div class="d-flex align-items-center">
 		        <span class="fw-bold me-3"><i class="bi bi-funnel-fill"></i> 상태 필터</span>
-		        
 		        <div class="btn-group" role="group" aria-label="Product Status Filter">
 		        	<%-- 전체 상품 --%>
 			        <c:choose>
@@ -262,16 +234,7 @@
 					        </c:otherwise>
 					    </c:choose>
 					</td>
-					<!-- 상품명 -->
-					<td class="text-start">
-						<%-- jQuery 로 .product-link 에 onClick 코드 작성함 --%>
-						<a class="product-link" href="javascript:void(0)"
-							data-id="${ productDto.productId }">
-							${ productDto.productReleaseName }
-						</a>
-						<br>
-						<small class="text-muted">${ productDto.productAlias }</small>
-					</td>
+					<td class="text-start">${ productDto.productReleaseName }<br><small class="text-muted">${ productDto.productAlias }</small></td>
 					<td>
 						<c:choose>
 					        <c:when test="${productDto.isPublicName == '공개'}">
@@ -340,10 +303,13 @@
 
 		<!-- 돌아가기 버튼 영역 -->
         <div class="d-flex justify-content-center mt-0 py-5">
+        	<%--
+            <button type="button" class="btn btn-secondary px-5 fw-bold" onclick="location.href='mainDashBoard.jsp'">
+            --%>
             <button type="button" class="btn btn-secondary px-5 fw-bold" onclick="location.href='${ pageContext.request.contextPath }/admin'">
                 대시보드로 돌아가기
             </button>
-        </div>
+        </div>      
 
     </div>
 </body>

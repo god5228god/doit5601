@@ -143,7 +143,7 @@ $(function() {
 							<table class="table align-middle border-top" id="auction-status-table">
 								<thead class="table-light">
 									<tr class="text-center">
-										<th style="width: 5%">No.</th>
+										<th style="width: 5%">번호</th>
 										<th style="width: 45%">경매 상품 정보</th>
 										<th style="width: 10%">남은 시간</th>
 										<th style="width: 10%">참여 인원</th>
@@ -165,13 +165,9 @@ $(function() {
 											class="rounded shadow-sm" alt="상품" style="width: 60px; height: 60px; object-fit: cover;">
 												<div class="ms-4">
 													<div class="fw-bold">
-														<a href="${pageContext.request.contextPath }/auction/detail?auctionId=${dto.auctionId}" class="text-decoration-none text-dark link-primary">${dto.auctionTitle }</a>
+														<a href="/auctions/#" class="text-decoration-none text-dark link-primary">${dto.auctionTitle }</a>
 													</div>
-													<div class="text-muted small">시작일: 
-												<%-- 	<fmt:formatDate value="${dto.auctionStartDate }" pattern="yyyy-MM-dd"/> --%>
-												<fmt:parseDate value="${dto.auctionEndDate}" var="parsedDate" pattern="yyyy-MM-dd HH:mm:ss" />
-												<fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm" />
-													</div>
+													<div class="text-muted small">시작일: ${dto.auctionStartDate }</div>
 												</div>
 											</div>
 										</td>

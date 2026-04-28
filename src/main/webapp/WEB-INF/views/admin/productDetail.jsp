@@ -17,7 +17,7 @@
 <body class="bg-light">
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4 class="fw-bold">상품 상세 정보</h4>
+        <h4 class="fw-bold">일반 상품 상세 정보</h4>
         <div>
             <button class="btn btn-outline-secondary me-2">상품 비공개 처리</button>
             <button class="btn btn-danger">삭제 및 패널티 부여</button>
@@ -28,29 +28,20 @@
         <div class="info-header">기본 상품 정보</div>
         <div class="info-row">
             <div class="info-label">상품 이미지</div>
-            <div class="info-value text-center">
-            	<img src="${ pageContext.request.contextPath }/${ productDto.imagePath1 }" class="detail-img">
-           	</div>
+            <div class="info-value text-center"><img src="${ pageContext.request.contextPath }/images/tempFigureImage.png" class="detail-img"></div>
         </div>
         <div class="info-row">
             <div class="info-label">상품명</div>
-            <div class="info-value">${ productDto.productReleaseName }</div>
+            <div class="info-value">하츠네 미쿠 한정판 피규어</div>
         </div>
         <div class="info-row">
             <div class="info-label">제조사/국가</div>
-            <div class="info-value">${ productDto.manufacturerName } / ${ productDto.productCountryName }</div>
+            <div class="info-value">모름 / 일본</div>
         </div>
         <div class="info-row">
             <div class="info-label">상태 등급</div>
-            <div class="info-value"><span class="badge bg-success">${ productDto.productGradeName }</span></div>
+            <div class="info-value"><span class="badge bg-success">최상</span></div>
         </div>
-    </div>
-    
-    <!-- 돌아가기 버튼 영역 -->
-    <div class="d-flex justify-content-center mt-0 py-5">
-        <button type="button" class="btn btn-secondary px-5 fw-bold" onclick="history.back();">
-            이전 페이지로 돌아가기
-        </button>
     </div>
 </div>
 </body>
